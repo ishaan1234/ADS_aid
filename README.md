@@ -1,5 +1,7 @@
 # Advanced Data Structures Study Buddy
 
+#### By Ishaan Gupta: guptaishaan@ufl.edu
+
 An interactive learning application designed to help students master Advanced Data Structures concepts through flashcards, visualizations, practice problems, and hands-on coding.
 
 ## Features
