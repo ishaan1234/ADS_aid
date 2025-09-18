@@ -1,0 +1,250 @@
+.practice-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.practice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.practice-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.practice-filters {
+  display: flex;
+  gap: 12px;
+}
+
+.practice-filters select {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.practice-stats {
+  display: flex;
+  gap: 24px;
+  background: var(--bg-secondary);
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 30px;
+}
+
+.practice-stats .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.practice-stats .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.practice-stats .stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.practice-stats .stat-value.correct {
+  color: var(--success);
+}
+
+.practice-stats .stat-value.incorrect {
+  color: var(--error);
+}
+
+.problem-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-md);
+}
+
+.problem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.problem-category {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.problem-difficulty {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.problem-difficulty.beginner {
+  background: var(--success);
+  color: white;
+}
+
+.problem-difficulty.intermediate {
+  background: var(--warning);
+  color: #333;
+}
+
+.problem-difficulty.advanced {
+  background: var(--error);
+  color: white;
+}
+
+.problem-progress {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.problem-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.problem-question {
+  font-size: 16px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.problem-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.option-button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.option-button:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent);
+}
+
+.option-button.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.option-button.correct {
+  background: var(--success);
+  color: white;
+  border-color: var(--success);
+}
+
+.option-button.incorrect {
+  background: var(--error);
+  color: white;
+  border-color: var(--error);
+}
+
+.option-letter {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: 50%;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.option-button.selected .option-letter,
+.option-button.correct .option-letter,
+.option-button.incorrect .option-letter {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.option-text {
+  flex: 1;
+  font-size: 15px;
+}
+
+.result-icon {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.explanation {
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+
+.explanation h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.explanation p {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.problem-actions {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .practice-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .problem-card {
+    padding: 20px;
+  }
+
+  .option-button {
+    padding: 12px 16px;
+  }
+}

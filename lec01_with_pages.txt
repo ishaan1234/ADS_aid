@@ -1,0 +1,4415 @@
+
+==================================================
+[PAGE 1]
+==================================================
+
+Advanced Data Structures
+Sartaj Sahni
+
+
+==================================================
+[PAGE 2]
+==================================================
+
+Clip Art Sources
+•www.barrysclipart.com
+•www.livinggraphics.com
+•www.rad.kumc.edu
+•www.livinggraphics.com 
+
+==================================================
+[PAGE 3]
+==================================================
+
+What The Course Is About
+•Study data structures for:
+▪External sorting
+▪Single and double ended priority queues
+▪Dictionaries
+▪Multidimensional search
+▪Computational geometry
+▪Image processing
+▪Packet routing and classification
+▪…
+
+
+==================================================
+[PAGE 4]
+==================================================
+
+What The Course Is About
+•Concerned with:
+▪Worst-case complexity
+▪Average complexity
+▪Amortized complexity
+
+
+==================================================
+[PAGE 5]
+==================================================
+
+Prerequisites
+✓Asymptotic Complexity
+▪Big Oh, Theta, and Omega notations
+✓Undergraduate data structures
+▪Stacks and Queues
+▪Linked lists
+▪Trees
+▪Graphs✓C, C++, Java, or Python
+
+==================================================
+[PAGE 6]
+==================================================
+
+Web Site
+➢www.cise.ufl.edu/~sahni/cop5536
+➢http://elearning.ufl.edu
+➢Handouts, syllabus, readings, 
+assignments, past exams, past 
+exam solutions, TAs, Internet 
+lectures, PowerPoint presentations, 
+etc.
+
+
+==================================================
+[PAGE 7]
+==================================================
+
+Assignments, Tests, & Grades
+•25% for assignments
+▪There will be two assignments.
+•25% for each test
+▪There will be three tests.
+
+==================================================
+[PAGE 8]
+==================================================
+
+Grades (Rough Cutoffs)
+•A   >= 85%
+•A- >= 81%
+•B+ >= 77%
+•B   >= 72%
+•B- >= 67%
+•C+ >= 63%
+•C   >= 60%
+•C- >= 55%
+
+==================================================
+[PAGE 9]
+==================================================
+
+Kinds Of Complexity
+✓Worst-case complexity.
+✓Average complexity.
+•Amortized complexity.
+
+==================================================
+[PAGE 10]
+==================================================
+
+Data Structure Z
+•Operations
+▪Initialize
+▪Insert
+▪Delete
+•Examples
+▪Linear List
+▪Stack
+▪Queue
+▪…
+
+==================================================
+[PAGE 11]
+==================================================
+
+Data Structure Z
+•Suppose that the worst-case complexity is
+▪Initialize O(1)
+▪Insert O(s)
+▪Delete O(s)
+where  s is the size of Z.
+•How much time does it take to perform a 
+sequence of 1 initialize followed by n inserts and 
+deletes?
+•O(n2)
+
+==================================================
+[PAGE 12]
+==================================================
+
+Data Structure Z
+•Suppose further that the average complexity is
+▪Initialize O(1)
+▪Insert O(log s)
+▪Delete O(log s)
+•How much time does it take to perform a 
+sequence of 1 initialize followed by n inserts and 
+deletes?
+•O(n2)
+
+==================================================
+[PAGE 13]
+==================================================
+
+An Application P
+•Initialize Z
+•Solve P by performing many inserts and deletes 
+plus other tasks.
+•Examples
+▪Dijkstra’s single -source shortest paths
+▪Minimum cost spanning trees
+ 
+
+==================================================
+[PAGE 14]
+==================================================
+
+An Application P
+•Total time to solve P using  Z is
+ time for inserts/deletes +  time for other tasks 
+= O(n2) + time for other tasks
+  where  n is the number of inserts/deletes
+  
+At times a better bound can be obtained using 
+amortized complexity.
+
+==================================================
+[PAGE 15]
+==================================================
+
+Amortized Complexity
+•The amortized complexity  of a task is the 
+amount you charge  the task.
+•The conventional way to bound the cost of doing 
+a task  n times is to use one of the expressions 
+▪ n*(worst-case cost of task)
+▪(worst-case cost  of task i )
+•The amortized complexity  way to bound the cost 
+of doing a task  n times is to use one of the 
+expressions
+▪n*(amortized cost of task)
+▪(amortized cost of task i )
+
+==================================================
+[PAGE 16]
+==================================================
+
+Amortized Complexity
+•The amortized complexity of a task may bear no 
+direct relationship to the actual complexity of the 
+task. I.e., it may be <, =, or > actual task 
+complexity.
+
+==================================================
+[PAGE 17]
+==================================================
+
+Amortized Complexity
+•In worst-case complexity analysis, each task is 
+charged an amount that is >= its cost. So,
+(actual cost  of task i ) 
+= ( worst-case cost of task i)
+•In amortized analysis, some tasks may be charged 
+an amount that is < their cost. The amount 
+charged must ensure:
+(actual cost  of task i ) 
+= ( amortized cost of task i)
+
+==================================================
+[PAGE 18]
+==================================================
+
+Potential Function P()
+•P(i) = amortizedCost(i) – actualCost(i) + P(i – 1)
+• (P(i) – P(i–1)) =  
+                    (amortizedCost(i) –actualCost(i))
+•P(n) – P(0) = (amortizedCost(i) –actualCost(i))
+•P(n) – P(0) >= 0
+•When  P(0) = 0 , P(i) is the amount by which the  
+first i tasks/operations have been over charged.
+
+==================================================
+[PAGE 19]
+==================================================
+
+Arithmetic Statements
+•Rewrite an arithmetic statement as a 
+sequence of statements that do not use 
+parentheses.
+•a = x+((a+b)*c+d)+y;
+    is equivalent to the sequence:
+     z1 = a+b;
+     z2 = z1*c+d;
+       a = x+z2+y;
+
+==================================================
+[PAGE 20]
+==================================================
+
+Arithmetic Statements
+•The rewriting is done using a stack and a 
+method processNextSymbol.
+•create an empty stack;
+    for (int i = 1; i <= n; i++)
+        // n is number of symbols in statement  
+        processNextSymbol();a = x+((a+b)*c+d)+y;
+
+==================================================
+[PAGE 21]
+==================================================
+
+Arithmetic Statements
+•processNextSymbol extracts the next 
+symbol from the input statement.
+•Symbols other than ) and ; are simply 
+pushed on to the stack.a = x+((a+b)*c+d)+y;
+a=x+((a+b
+
+==================================================
+[PAGE 22]
+==================================================
+
+Arithmetic Statements
+•If the next symbol is ), symbols are 
+popped from the stack up to and 
+including the first (, an assignment 
+statement is generated, and the left 
+hand symbol is added to the stack.a = x+((a+b)*c+d)+y;
+a=x+((a+b
+z1 = a+b;
+
+==================================================
+[PAGE 23]
+==================================================
+
+Arithmetic Statements
+a = x+((a+b)*c+d)+y;
+a=x+(z1
+z1 = a+b;*c+d
+z2 = z1*c+d;•If the next symbol is ), symbols are 
+popped from the stack up to and 
+including the first (, an assignment 
+statement is generated, and the left 
+hand symbol is added to the stack.
+
+==================================================
+[PAGE 24]
+==================================================
+
+Arithmetic Statements
+a = x+((a+b)*c+d)+y;
+a=x+z2z1 = a+b;
+z2 = z1*c+d;+y•If the next symbol is ), symbols are 
+popped from the stack up to and 
+including the first (, an assignment 
+statement is generated, and the left 
+hand symbol is added to the stack.
+
+==================================================
+[PAGE 25]
+==================================================
+
+Arithmetic Statements
+•If the next symbol is ;, symbols are 
+popped from the stack until the 
+stack becomes empty. The final 
+assignment statement                       
+a = x+z2+y;                                                 
+is generated.a = x+((a+b)*c+d)+y;
+z1 = a+b;
+a=x+z2+y
+z2 = z1*c+d;
+
+==================================================
+[PAGE 26]
+==================================================
+
+Complexity Of processNextSymbol
+•O(number of symbols that get popped from 
+stack )
+•O(i), where i is for loop index.a = x+((a+b)*c+d)+y;
+
+==================================================
+[PAGE 27]
+==================================================
+
+Overall Complexity (Conventional Analysis)
+•So, overall complexity is O(i) = O(n2).
+•Alternatively, O(n*n) = O(n2).
+•Although correct, a more careful analysis permits 
+us to conclude that the complexity is O(n) .create an empty stack;
+    for (int i = 1; i <= n; i++)
+        // n is number of symbols in statement  
+        processNextSymbol();
+
+==================================================
+[PAGE 28]
+==================================================
+
+Ways To Determine Amortized 
+Complexity
+•Aggregate method.
+•Accounting method.
+•Potential function method.
+
+==================================================
+[PAGE 29]
+==================================================
+
+Aggregate Method
+•Somehow obtain a good upper bound on the 
+actual cost of the n invocations of 
+processNextSymbol()
+•Divide this bound by n to get the amortized 
+cost of one invocation of 
+processNextSymbol()
+•Easy to see that
+(actual cost ) = ( amortized cost )
+
+==================================================
+[PAGE 30]
+==================================================
+
+Aggregate Method
+•The actual cost of the n invocations of 
+processNextSymbol()
+   equals number of stack pop and push operations.
+•The n invocations cause at most n symbols to be 
+pushed on to the stack.
+•This count includes the symbols for new variables, 
+because each new variable is the result of a ) being 
+processed. Note that no )s get pushed on to the 
+stack.
+
+==================================================
+[PAGE 31]
+==================================================
+
+Aggregate Method
+•The actual cost of the n invocations of 
+processNextSymbol()                                                
+is at most  2n. 
+•So, using 2n/n = 2  as the amortized cost of 
+processNextSymbol()                                                
+is OK, because this cost results in                    
+(actual cost ) = ( amortized cost )
+•Since the amortized cost of  processNextSymbol()   
+is 2, the actual cost of all n invocations is at most 2n.
+
+==================================================
+[PAGE 32]
+==================================================
+
+Aggregate Method
+•The aggregate method isn’t very useful, because to 
+figure out the amortized cost we must first obtain a 
+good bound on the aggregate cost of a sequence of 
+invocations.
+•Since our objective was to use amortized complexity 
+to get a better bound on the cost of a sequence of 
+invocations, if we can obtain this better bound 
+through other techniques, we  can omit dividing the 
+bound by n to obtain the amortized cost.
+
+==================================================
+[PAGE 33]
+==================================================
+
+Amortized Complexity
+✓Aggregate method.
+•Accounting method.
+•Potential function method.
+
+==================================================
+[PAGE 34]
+==================================================
+
+Potential Function P()
+•P(i) = amortizedCost(i) –actualCost(i) + P(i –1)
+•(P(i) –P(i –1)) =  
+(amortizedCost(i) –actualCost(i))
+•P(n) –P(0) = (amortizedCost(i) –actualCost(i))
+•P(n) –P(0) >= 0
+•When P(0) = 0 ,P(i)is the amount by which the
+firstioperations have been over charged.
+
+==================================================
+[PAGE 35]
+==================================================
+
+Potential Function Example
+a = x + ( ( a + b  ) * c + d  ) + y ;
+actual cost
+amortized cost
+potential1 1 1 1 1 11 1 1 5 1 1 1 1 7 1 1 7
+2 2 2 2 2 22 2 2 2 2   2 2 2 2 2 2 2
+1 2 3 4 5 67 8 9 6 7 8 9 105 6 7 2
+Potential = stack size except at end.
+
+==================================================
+[PAGE 36]
+==================================================
+
+Accounting Method
+•Guess the amortized cost.
+•Show that P(n) – P(0) >= 0 .
+
+==================================================
+[PAGE 37]
+==================================================
+
+Accounting Method Example
+•Guess that amortized complexity of 
+processNextSymbol  is 2.
+•Start with P(0) = 0 .
+•Can show that P(i) >=  number of elements 
+on stack after ith symbol is processed.create an empty stack;
+    for (int i = 1; i <= n; i++)
+        // n is number of symbols in statement  
+        processNextSymbol();
+
+==================================================
+[PAGE 38]
+==================================================
+
+Accounting Method Example
+•Potential >= number of symbols on stack.
+•Therefore, P(i) >= 0  for all i.
+•In particular, P(n) >= 0 .a = x + ( ( a + b  ) * c + d  ) + y ;
+actual cost
+amortized cost
+potential1 1 1 1 1 11 1 1 5 1 1 1 1 7 1 1 7
+2 2 2 2 2 22 2 2 2 2   2 2 2 2 2 2 2
+1 2 3 4 5 67 8 9 6 7 8 9 105 6 7 2
+
+==================================================
+[PAGE 39]
+==================================================
+
+Potential Method
+•Guess a suitable potential function for 
+which P(n) – P(0) >= 0  for all n.
+•Derive amortized cost of ith operation using 
+P  = P(i) – P(i –1)
+      = amortized cost – actual cost
+•amortized cost = actual cost + P
+
+==================================================
+[PAGE 40]
+==================================================
+
+Potential Method Example
+•Guess that the potential function is  P(i) =  
+number of elements on stack after ith symbol 
+is processed (exception is P(n) = 2 ).
+•P(0) = 0  and P(i) – P(0) >=  0 for all  i.create an empty stack;
+    for (int i = 1; i <= n; i++)
+        // n is number of symbols in statement  
+        processNextSymbol();
+
+==================================================
+[PAGE 41]
+==================================================
+
+ith Symbol Is Not ) or ;
+•Actual cost of processNextSymbol  is 1.
+•Number of elements on stack increases by 1.
+•P = P(i) – P(i –1) = 1 .
+•amortized cost = actual cost + P
+                          = 1 + 1 = 2
+
+==================================================
+[PAGE 42]
+==================================================
+
+ith Symbol Is )
+•Actual cost of processNextSymbol  is #pops + 1 .
+•Number of elements on stack decreases by 
+#pops –1.
+•P = P(i) – P(i –1) = 1 – #pops .
+•amortized cost = actual cost + P
+                         = #pops + 1 + (1 – #pops)
+                   = 2
+
+==================================================
+[PAGE 43]
+==================================================
+
+ith Symbol Is ;
+•Actual cost of processNextSymbol  is 
+   #pops = P(n –1).
+•Number of elements on stack decreases by 
+P(n –1).
+•P = P(n) – P(n –1) = 2 – P(n –1).
+•amortized cost = actual cost + P
+                         = P(n –1) + (2 – P(n –1))
+                   = 2
+
+==================================================
+[PAGE 44]
+==================================================
+
+Binary Counter
+•n-bit counter
+•Cost of incrementing counter is number of 
+bits that change.
+•Cost of 001011  => 001100  is 3.
+•Counter starts at 0.
+•What is the cost of incrementing the counter 
+m times ( m <= 2n-1)?
+
+
+==================================================
+[PAGE 45]
+==================================================
+
+Worst-Case Method
+•Worst-case cost of an increment is  n.
+•Cost of 011111  => 100000  is 6.
+•So, the cost of  m increments is at most mn.
+
+
+==================================================
+[PAGE 46]
+==================================================
+
+Aggregate Method
+•Each increment changes bit 0 (i.e., the right  
+most bit).
+•Exactly floor(m/2)  increments change bit 1 
+(i.e., second bit from right).
+•Exactly floor(m/4)  increments change bit 2.
+counter0 0 0 0 0
+
+==================================================
+[PAGE 47]
+==================================================
+
+Aggregate Method
+•Exactly floor(m/8)  increments change bit 3.
+•So, the cost of  m increments is                     
+m + floor(m/2) + floor(m/4) +  ....   < 2m  
+•Amortized cost of an increment is  2m/m = 2 .
+counter0 0 0 0 0
+
+==================================================
+[PAGE 48]
+==================================================
+
+Accounting Method
+•Guess that the amortized cost of an increment is 2.
+•Now show that P(m) – P(0) >= 0  for all m.
+•1st increment:   
+▪one unit of amortized cost is used to pay for the 
+change in bit 0 from  0 to 1.
+▪the other unit remains as a credit on bit 0 and is used 
+later to pay for the time when bit 0 changes from 1 to 
+0.
+bits
+credits0
+00 0 0 0
+0 0 0 00
+00 0 0 1
+0 0 0 1
+
+==================================================
+[PAGE 49]
+==================================================
+
+2nd Increment.
+▪ one unit of amortized cost is used to pay for the 
+change in bit 1 from  0 to 1
+▪ the other unit remains as a credit on bit 1 and is used 
+later to pay for the time when bit 1 changes from 1 to 
+0
+▪ the change in bit 0 from 1 to 0 is paid for by the credit 
+on bit 0
+bits
+credits0
+00 0 0 1
+0 0 0 10
+00 0 1 0
+0 0 1 0
+
+==================================================
+[PAGE 50]
+==================================================
+
+3rd Increment.
+▪ one unit of amortized cost is used to pay for the 
+change in bit 0 from  0 to 1
+▪ the other unit remains as a credit on bit 0 and is used 
+later to pay for the time when bit 1 changes from 1 to 
+0
+bits
+credits0
+00 0 1 0
+0 0 1 00
+00 0 1 1
+0 0 1 1
+
+==================================================
+[PAGE 51]
+==================================================
+
+4th Increment.
+▪ one unit of amortized cost is used to pay for the 
+change in bit 2 from 0 to 1
+▪ the other unit remains as a credit on bit 2 and is used 
+later to pay for the time when bit 2 changes from 1 to 
+0
+▪ the change in bits 0 and 1 from 1 to 0 is paid for by 
+the credits on these bits
+bits
+credits0
+00 0 1 1
+0 0 1 10
+00 1 0 0
+0 1 0 0
+
+==================================================
+[PAGE 52]
+==================================================
+
+Accounting Method
+•P(m) – P(0) = (amortizedCost(i) –actualCost(i))
+                     = amount by which the  first m
+                      increments have been over charged   
+                    = number of credits
+                   = number of 1s in binary rep. of m
+                     >= 0        
+
+==================================================
+[PAGE 53]
+==================================================
+
+Potential Method
+•Guess a suitable potential function for 
+which P(n) – P(0) >= 0  for all n.
+•Derive amortized cost of ith operation using 
+P  = P(i) – P(i –1)
+      = amortized cost – actual cost
+•amortized cost = actual cost + P
+
+==================================================
+[PAGE 54]
+==================================================
+
+Potential Method
+•Guess P(i) =  number of  1s in counter after ith 
+increment.
+•P(i)  >= 0 and P(0) = 0 .
+•Let q = # of 1s at right end of counter just before ith 
+increment ( 01001111  => q = 4 ).
+•Actual cost of ith increment is 1+q.
+• P  = P(i) – P(i – 1) = 1 – q (0100111 => 0101000 )
+•amortized cost = actual cost + P
+                           = 1+q + (1 – q) = 2 
+
+==================================================
+[PAGE 55]
+==================================================
+
+External Sorting
+•Sort nrecords/elements that reside on a disk.
+•Space needed by the nrecords is very large.
+▪nis very large, and each record may be large or 
+small.
+▪nis small, but each record is very large.
+•So, not feasible to input the nrecords, sort, 
+and output in sorted order.
+
+==================================================
+[PAGE 56]
+==================================================
+
+Small n But Large File
+•Input the record keys.
+•Sort the nkeys to determine the sorted order 
+for the nrecords.
+•Permute the records into the desired order 
+(possibly several fields at a time).
+•We focus on the case: large n, large file.
+
+==================================================
+[PAGE 57]
+==================================================
+
+New Data Structures/Concepts
+•Tournament trees.
+•Huffman trees.
+•Double-ended priority queues.
+•Buffering.
+•Ideas also may be used to speed algorithms 
+for small instances by using cache more 
+efficiently.
+
+==================================================
+[PAGE 58]
+==================================================
+
+External Sort Computer Model
+MAIN
+ALUDISK
+
+==================================================
+[PAGE 59]
+==================================================
+
+Disk Characteristics (HDD)
+•Seek time
+▪Approx. 100,000  arithmetics
+•Latency time
+▪Approx. 25,000  arithmetics
+•Transfer time
+•Data access by blocktracksread/write head
+
+==================================================
+[PAGE 60]
+==================================================
+
+Traditional Internal Memory Model
+MAIN
+ALU
+
+==================================================
+[PAGE 61]
+==================================================
+
+Matrix Multiplication
+for (int i = 0; i < n; i++)
+   for  (int j = 0; j < n; j++)
+      for  (int k = 0; k < n; k++)
+          c[i][j] += a[i][k] * b[k][j];
+• ijk, ikj, jik, jki, kij, kji orders of loops yield same result.
+• All perform same number of operations.
+• But run time may differ significantly!
+
+==================================================
+[PAGE 62]
+==================================================
+
+More Accurate Memory Model
+RL1L2MAIN
+ALU
+8-3232KB 256KB 1GB
+1C 2C 10C 100C
+
+==================================================
+[PAGE 63]
+==================================================
+
+2D Array Representation In Java, C, and C++
+int x[3][4];a b c d
+e f g h
+i j k lx[]
+Array of Arrays Representation
+
+==================================================
+[PAGE 64]
+==================================================
+
+ijk Order
+. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+C. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+A. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+B
+=
+ *for (int i = 0; i < n; i++)
+   for  (int j = 0; j < n; j++)
+      for  (int k = 0; k < n; k++)
+          c[i][j] += a[i][k] * b[k][j];
+
+==================================================
+[PAGE 65]
+==================================================
+
+ijk Analysis
+. . . . . . . . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+C. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+A. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+B
+ =
+ *
+•Block size = width of cache line = w.
+•Assume one-level cache.
+•C => n2/w cache misses.
+•A => n3/w cache misses, when n is large.
+•B => n3 cache misses, when n is large.
+•Total cache misses = n3/w(1/n + 1 + w) . 
+
+==================================================
+[PAGE 66]
+==================================================
+
+ikj Order
+. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+C. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+A. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+B
+=
+ *for (int i = 0; i < n; i++)
+   for  (int k = 0; k < n; k++)
+      for  (int j = 0; j < n; j++)
+          c[i][j] += a[i][k] * b[k][j];
+
+==================================================
+[PAGE 67]
+==================================================
+
+ikj Analysis
+. . . . . . . . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+C. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+A. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .. . . . . .
+B
+ =
+ *
+•C => n3/w cache misses, when n is large.
+•A => n2/w cache misses.
+•B => n3/w cache misses, when n is large.
+•Total cache misses = n3/w(2 + 1/n) . 
+
+==================================================
+[PAGE 68]
+==================================================
+
+ijk Vs. ikj Comparison
+•ijk cache misses = n3/w(1/n + 1 + w) . 
+•ikj cache misses = n3/w(2 + 1/n) .
+•ijk/ikj ~ (1 + w)/2 , when n is large.
+•w = 4  (32-byte cache line, double precision data)
+▪ratio ~ 2.5 . 
+•w = 8  (64-byte cache line, double precision data)
+▪ratio ~ 4.5 . 
+•w = 16  (64-byte cache line, integer data)
+▪ratio ~ 8.5 . 
+
+==================================================
+[PAGE 69]
+==================================================
+
+Prefetch
+•Prefetch can hide memory latency
+•Successful prefetch requires ability to 
+predict a memory access much in advance
+•Prefetch cannot reduce energy as prefetch 
+does not reduce number of memory 
+accesses
+
+==================================================
+[PAGE 70]
+==================================================
+
+Faster Internal Sorting
+•May apply external sorting ideas to internal 
+sorting.
+•Internal tiled merge sort gives 2x (or more) 
+speedup over traditional merge sort.
+
+==================================================
+[PAGE 71]
+==================================================
+
+External Sort Methods
+•Base the external sort method on a fast 
+internal sort method.
+•Average run time
+▪Quick sort
+•Worst-case run time
+▪Merge sort
+
+==================================================
+[PAGE 72]
+==================================================
+
+Internal Quick Sort
+6285111041973
+Use 6 as the pivot.
+2 8 5 1110 41 97 36
+Sort left and right groups recursively.
+
+==================================================
+[PAGE 73]
+==================================================
+
+Quick Sort – External Adaptation
+•3 input/output buffers
+▪input, small, large
+•rest is used for middle groupDISK input small largeMiddle group
+
+==================================================
+[PAGE 74]
+==================================================
+
+Quick Sort – External Adaptation
+•fill middle group and input buffer from disk
+•if next record <= middlemin send to small
+•else if  next record >= middlemax send to large
+•else remove middlemin or middlemax from middle 
+and add new record to middle groupDISK input small largeMiddle group
+
+==================================================
+[PAGE 75]
+==================================================
+
+Quick Sort – External Adaptation
+•Fill input  buffer when it gets empty.
+•Write small/large  buffer when full.
+•Write  middle  group in sorted order when done.
+•Double-ended priority queue.
+•Use additional buffers to reduce I/O wait time.DISK input small largeMiddle group
+
+==================================================
+[PAGE 76]
+==================================================
+
+External Sorting
+•Adapt fastest internal-sort methods.
+✓Quick sort …best average run time.
+•Merge sort … best worst -case run time.
+
+==================================================
+[PAGE 77]
+==================================================
+
+Internal Merge Sort Review
+•Phase 1
+▪Create initial sorted segments
+•Natural segments
+•Insertion sort
+•Phase 2
+▪Merge pairs of sorted segments, in merge 
+passes, until only 1segment remains.
+
+==================================================
+[PAGE 78]
+==================================================
+
+External Merge Sort
+•Sort 10,000 records.
+•Enough memory for 500records.
+•Block size is 100records.
+•tIO=time to input/output 1block
+(includes seek, latency, and transmission times)
+•tIS=time to internally sort 1memory load
+•tIM=time to internally merge 1block load
+
+==================================================
+[PAGE 79]
+==================================================
+
+External Merge Sort
+•Two phases.
+▪Run generation.
+➢A run is a sorted sequence of records.
+▪Run merging.
+
+==================================================
+[PAGE 80]
+==================================================
+
+Run Generation
+•Input 5 blocks.
+•Sort.
+•Output as a run.
+•Do 20 times.•5tIO
+•tIS
+•5tIO
+•200tIO + 20tISDISKMEMORY
+500 records10,000 records
+5 blocks100 blocks
+
+==================================================
+[PAGE 81]
+==================================================
+
+Run Merging
+•Merge Pass.
+▪Pairwise merge the 20 runs into 10.
+▪In a merge pass all runs (except possibly one) 
+are pairwise merged.
+•Perform 4 more merge passes, reducing the 
+number of runs to 1.
+
+==================================================
+[PAGE 82]
+==================================================
+
+Merge 20 Runs
+R1 R2 R3R4 R5 R6 R7 R8R9R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20
+S1 S2 S3 S4 S5 S6 S7 S8 S9 S10
+T1 T2 T3 T4 T5
+U1 U2 U3
+V1 V2
+W1
+
+==================================================
+[PAGE 83]
+==================================================
+
+Merge R1 and R2
+•Fill I0 (Input 0) from R1 and I1 from R2.
+•Merge from I0 and I1 to output buffer.
+•Write whenever output buffer full.
+•Read whenever input buffer empty.DISKInput 0 Input 1Output
+
+==================================================
+[PAGE 84]
+==================================================
+
+Time To Merge R1 and R2
+•Each is 5 blocks long.
+•Input time = 10tIO.
+•Write/output time = 10tIO.
+•Merge time = 10tIM.
+•Total time = 20tIO + 10tIM .
+
+==================================================
+[PAGE 85]
+==================================================
+
+Time For Pass 1 (R    S)
+•Time to merge one pair of runs                    
+= 20tIO + 10tIM .
+•Time to merge all 10 pairs of runs                    
+= 200tIO + 100tIM .
+
+==================================================
+[PAGE 86]
+==================================================
+
+Time To Merge S1 and S2
+•Each is 10 blocks long.
+•Input time = 20tIO.
+•Write/output time = 20tIO.
+•Merge time = 20tIM.
+•Total time = 40tIO + 20tIM .
+
+==================================================
+[PAGE 87]
+==================================================
+
+Time For Pass 2 (S    T)
+•Time to merge one pair of runs                    
+= 40tIO + 20tIM .
+•Time to merge all 5 pairs of runs                    
+= 200tIO + 100tIM .
+
+==================================================
+[PAGE 88]
+==================================================
+
+Time For One Merge Pass
+•Time to input all blocks = 100tIO.
+•Time to output all blocks = 100tIO.
+•Time to merge all blocks = 100tIM .
+•Total time for a merge pass = 200tIO + 100tIM .
+
+==================================================
+[PAGE 89]
+==================================================
+
+Total Run-Merging Time
+•(time for one merge pass) * (number of passes)
+    = (time for one merge pass) 
+    * ceil(log2(number of initial runs))
+    = (200tIO + 100tIM) * ceil(log2(20))
+    = (200tIO + 100tIM) * 5
+
+==================================================
+[PAGE 90]
+==================================================
+
+Factors In Overall Run Time
+•Run generation. 200tIO + 20tIS
+▪Internal sort time.
+▪Input and output time.
+•Run merging. (200tIO + 100tIM) * ceil(log2(20))
+▪Internal merge time.
+▪Input and output time.
+▪Number of initial runs.
+▪Merge order (number of merge passes is 
+determined by number of runs and merge order)
+
+==================================================
+[PAGE 91]
+==================================================
+
+Improve Run Generation
+•Overlap input, output, and internal sorting.
+DISKMEMORYDISK
+
+==================================================
+[PAGE 92]
+==================================================
+
+Improve Run Generation
+•Generate runs whose length (on average) 
+exceeds memory size.
+•Equivalent to reducing number of runs 
+generated.
+
+==================================================
+[PAGE 93]
+==================================================
+
+Improve Run Merging
+•Overlap input, output, and internal merging.
+DISKMEMORYDISK
+
+==================================================
+[PAGE 94]
+==================================================
+
+Improve Run Merging
+•Reduce number of merge passes.
+▪Use higher-order merge.
+▪Number of passes                                               
+= ceil(logk(number of initial runs))             
+where k is the merge order.
+
+==================================================
+[PAGE 95]
+==================================================
+
+Merge 20 Runs Using 5-Way Merging
+R1 R2 R3R4 R5 R6 R7 R8R9R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20
+T1S1 S2 S3 S4
+Number of passes  = 2
+
+==================================================
+[PAGE 96]
+==================================================
+
+I/O Time Per Merge Pass
+•Number of input buffers needed is linear in 
+merge order k.
+•Since memory size is fixed, block size 
+decreases as k increases (after a certain k).
+•So, number of blocks increases.
+•So, number of seek and latency delays per 
+pass increases.
+
+==================================================
+[PAGE 97]
+==================================================
+
+I/O Time Per Merge Pass
+merge order k I/O 
+time 
+per 
+pass
+
+==================================================
+[PAGE 98]
+==================================================
+
+Total I/O Time To Merge Runs
+Total 
+I/O 
+time to 
+merge 
+runs
+merge order k •(I/O time for one merge pass)                                     
+* ceil(logk(number of initial runs))
+
+==================================================
+[PAGE 99]
+==================================================
+
+Internal Merge Time
+•Naïve way => k – 1 compares to determine next record to 
+move to the output buffer.
+•Time to merge n records is c(k – 1)n, where c is a constant.
+•Merge time per pass is c(k – 1)n.
+•Total merge time is c(k – 1)nlogkr  cn(k/log2k) log2r.R1 R2 R3 R4 R5 R6O
+
+==================================================
+[PAGE 100]
+==================================================
+
+Merge Time Using A Tournament Tree
+•Time to merge n records is dnlog2k, where d is a 
+constant.
+•Merge time per pass is dnlog2k.
+•Total merge time is (dnlog2k) logkr  = dnlog2r.R1 R2 R3 R4 R5 R6O
+
+==================================================
+[PAGE 101]
+==================================================
+
+Tournament Trees
+Winner trees.
+Loser Trees.
+
+
+==================================================
+[PAGE 102]
+==================================================
+
+Winner Tree –Definition
+Complete binary tree with n-1
+internal nodes and nexternal nodes.
+External nodes represent tournament 
+players.
+Each internal node represents a match 
+played between its two children; 
+the winner of the match is stored at 
+the internal node.
+Root has overall winner.
+
+==================================================
+[PAGE 103]
+==================================================
+
+Winner Tree For 16 Players
+player match node
+
+==================================================
+[PAGE 104]
+==================================================
+
+Winner Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 8
+Smaller element wins => min winner tree .3 6 1 3 2 4 2 53 1 2 2121
+
+==================================================
+[PAGE 105]
+==================================================
+
+Winner Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 8
+height is log2 n (excludes player level)3 6 1 3 2 4 2 53 1 2 2121
+
+==================================================
+[PAGE 106]
+==================================================
+
+Complexity Of Initialize
+•O(1)  time to play match at each match node.
+•n – 1 match nodes.
+•O(n)  time to initialize n-player winner tree.
+
+==================================================
+[PAGE 107]
+==================================================
+
+Winner Tree Operations
+•Initialize
+▪O(n) time
+•Get winner
+▪O(1)  time
+•Replace winner and replay
+▪O(log n)  time
+▪ More precisely  Theta(log n)
+•Tie breaker (player on left wins in case of a tie).
+
+==================================================
+[PAGE 108]
+==================================================
+
+Replace Winner And Replay
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 83 6 1 3 2 4 2 53 1 2 2121
+Replace winner with 6.
+
+==================================================
+[PAGE 109]
+==================================================
+
+Replace Winner And Replay
+4 3 6 8 6 5 7 3 2 6 9 4 5 2 5 83 6 1 3 2 4 2 53 1 2 2121
+Replay matches on path to root.
+
+==================================================
+[PAGE 110]
+==================================================
+
+Replace Winner And Replay
+4 3 6 8 6 5 7 3 2 6 9 4 5 2 5 83 6 1 3 2 4 2 53 1 2 2121
+Replay matches on path to root.
+
+==================================================
+[PAGE 111]
+==================================================
+
+Replace Winner And Replay
+4 3 6 8 6 5 7 3 2 6 9 4 5 2 5 83 6 1 3 2 4 2 53 1 2 2121
+Opponent is player who lost last match played at this node.
+
+==================================================
+[PAGE 112]
+==================================================
+
+Loser Tree
+Each match node stores the match 
+loser rather than the match winner.
+
+==================================================
+[PAGE 113]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 843
+8
+
+==================================================
+[PAGE 114]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+51
+7
+
+==================================================
+[PAGE 115]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+71
+62
+9
+
+==================================================
+[PAGE 116]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+52
+81
+64
+9
+
+==================================================
+[PAGE 117]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+81
+64
+9
+
+==================================================
+[PAGE 118]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+81
+64
+9
+
+==================================================
+[PAGE 119]
+==================================================
+
+Min Loser Tree For 16 Players
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+82
+64
+9
+
+==================================================
+[PAGE 120]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+82
+64
+91 Winner
+
+==================================================
+[PAGE 121]
+==================================================
+
+Complexity Of Loser Tree 
+Initialize
+•Start with 2 credits at each match node.
+•Use one to pay for the match played at that 
+node and the storing of the loser.
+•Use the other to pay for the store of a left 
+child winner.
+•Total time is O(n).
+•More precisely  Theta(n).
+
+
+==================================================
+[PAGE 122]
+==================================================
+
+Winner
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+82
+64
+91
+Replace winner with 6 and replay matches.65
+6332
+
+==================================================
+[PAGE 123]
+==================================================
+
+Complexity Of Replay
+•One match at each level that has a match 
+node.
+•O(log n)
+•More precisely  Theta(log n).
+
+
+==================================================
+[PAGE 124]
+==================================================
+
+Tournament Tree Applications
+•k-way merging of runs during an external 
+merge sort.
+•Truck loading.
+•Run generation.
+• …
+
+==================================================
+[PAGE 125]
+==================================================
+
+Truck Loading
+▪n packages to be loaded into trucks
+▪each package has a weight
+▪each truck has a capacity of c tons
+▪minimize number of trucks
+
+
+==================================================
+[PAGE 126]
+==================================================
+
+Bin Packing
+•n items to be packed into bins
+•each item has a size
+•each bin has a capacity of c
+•minimize number of bins
+
+==================================================
+[PAGE 127]
+==================================================
+
+Bin Packing
+Truck loading is same as bin packing.
+Truck is a bin that is to be packed (loaded).
+Package is an item/element.
+Bin packing to minimize number of bins is NP-hard.
+Several fast heuristics have been proposed.
+
+==================================================
+[PAGE 128]
+==================================================
+
+Bin Packing Heuristics
+•First Fit.
+▪Bins are arranged in left to right order.
+▪Items are packed one at a time in given order.
+▪Current item is packed into leftmost bin into which it 
+fits.
+▪If there is no bin into which current item fits, start a 
+new bin.
+
+==================================================
+[PAGE 129]
+==================================================
+
+Bin Packing Heuristics
+•First Fit Decreasing.
+▪Items are sorted into decreasing order.
+▪Then first fit is applied.
+
+==================================================
+[PAGE 130]
+==================================================
+
+Bin Packing Heuristics
+•Best Fit.
+▪Items are packed one at a time in given order.
+▪To determine the bin for an item, first determine set  S 
+of bins into which the item fits.
+▪If S is empty , then start a new bin and put item into this 
+new bin.
+▪Otherwise, pack into bin of  S that has least available 
+capacity .
+
+==================================================
+[PAGE 131]
+==================================================
+
+Bin Packing Heuristics
+•Best Fit Decreasing.
+▪Items are sorted into decreasing order.
+▪Then best fit is applied.
+
+==================================================
+[PAGE 132]
+==================================================
+
+Performance
+•For first fit and best fit:
+Heuristic Bins <= (17/10)(Minimum Bins) + 2
+•For first fit decreasing and best fit 
+decreasing:
+Heuristic Bins <= (11/9)(Minimum Bins) + 4
+
+
+==================================================
+[PAGE 133]
+==================================================
+
+Max Winner-Tree For 16 Bins
+8
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 84 8 5 7 6 9 5 87 9 8899
+Item size = 7
+
+==================================================
+[PAGE 134]
+==================================================
+
+7
+1Max Winner-Tree For 16 Bins
+6
+4 3 6 1 5 7 3 2 6 9 4 5 2 5 84 6 5 7 6 9 5 87 9 899
+
+==================================================
+[PAGE 135]
+==================================================
+
+Complexity Of First Fit
+O(n log n) , where n is the number of 
+items.
+
+
+==================================================
+[PAGE 136]
+==================================================
+
+Improve Run Generation
+•Overlap input,output, and internal CPU work.
+•Reduce the number of runs (equivalently, increase 
+average run length).
+DISKMEMORYDISK
+
+==================================================
+[PAGE 137]
+==================================================
+
+Internal Quick Sort
+6285111041973
+Use 6 as the pivot (median of 3).
+Input first, middle, and last blocks first.
+In-place partitioning.
+Input blocks from the ends toward the middle.
+Sort left and right groups recursively.
+Can begin output as soon as leftmost block is ready.4235161011978
+
+==================================================
+[PAGE 138]
+==================================================
+
+Alternative Internal Sort Scheme
+DISKDISK
+A1 A2 A3Partition into 3 areas, each may be 
+more than 1 block in size.
+
+==================================================
+[PAGE 139]
+==================================================
+
+Steady State Operation
+Read from 
+diskWrite to 
+diskInternal 
+sorting
+•Synchronization is done when the current internal sort 
+terminates.
+
+==================================================
+[PAGE 140]
+==================================================
+
+DISKMEMORYDISKNew Strategy
+•Use 2 input and 2 output buffers.
+•Rest of memory is used for a min loser tree.Input 1 Input 0Output 0 Output 1
+Loser Tree
+•  Actually, 3 buffers adequate.
+
+==================================================
+[PAGE 141]
+==================================================
+
+Steady State Operation
+Read from 
+diskWrite to 
+diskRun 
+generation
+•Synchronization is done when the active input buffer gets 
+empty (the active output buffer will be full at this time).
+
+==================================================
+[PAGE 142]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 843
+8O0 O1
+I0 I1Initialize
+Fill From Disk
+
+==================================================
+[PAGE 143]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+51
+7Initialize
+O0 O1
+I0 I1
+Fill From Disk
+
+==================================================
+[PAGE 144]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+71
+62
+9Initialize
+O0 O1
+I0 I1
+Fill From Disk
+
+==================================================
+[PAGE 145]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+52
+81
+64
+9Initialize
+O0 O1
+I0 I1
+Fill From Disk
+
+==================================================
+[PAGE 146]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+81
+64
+9Initialize
+O0 O1
+I0 I1
+Fill From Disk
+
+==================================================
+[PAGE 147]
+==================================================
+
+4 3 6 8 1 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+82
+64
+9Initialize
+O0 O1
+I0 I1
+Fill From Disk
+
+==================================================
+[PAGE 148]
+==================================================
+
+Generate Run 1
+1 4 3 6 8 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+82
+64
+9O0 O1
+I0 I13
+5
+4
+Fill From Disk
+Fill From Tree
+
+==================================================
+[PAGE 149]
+==================================================
+
+Generate Run 1
+4 3 6 8 5 7 3 2 6 9 4 5 2 5 846
+83
+53
+72
+55
+82
+64
+9O0 O1
+I0 I13
+5
+4
+Fill From Disk
+Fill From Tree
+1
+33
+
+==================================================
+[PAGE 150]
+==================================================
+
+5O02
+3Generate Run 1
+4 3 6 8 5 7 3 6 9 4 5 2 5 846
+83
+53
+72
+55
+83
+64
+9O1
+I0 I13
+5
+4
+Fill From Disk
+Fill From Tree
+1
+54
+
+==================================================
+[PAGE 151]
+==================================================
+
+4 5O02
+3Generate Run 1
+4 3 6 8 5 7 3 6 9 4 52
+5 846
+83
+53
+72
+55
+83
+64
+9O1
+I0 I13
+5
+4
+Fill From Disk
+Fill From Tree
+1
+54
+Interchange Role Of Buffers
+
+==================================================
+[PAGE 152]
+==================================================
+
+5O02
+3 4 3 6 8 5 7 3 6 9 4 52
+5 846
+83
+53
+72
+55
+83
+64
+9O1
+I0 I1
+Fill From Disk
+Write To Disk
+1
+54
+4
+Interchange Role Of Buffers
+1
+9
+2
+Fill From Tree
+
+==================================================
+[PAGE 153]
+==================================================
+
+5O02
+3 4 3 6 8 5 7 3 6 9 4 52
+5 846
+83
+53
+74
+55
+83
+64
+9O1
+I0 I1
+Fill From Disk
+Write To Disk
+1
+54
+4
+1
+9
+2
+Fill From Tree Continue With Run 1
+
+==================================================
+[PAGE 154]
+==================================================
+
+O13
+4 5O02
+4 3 6 8 5 7 3 6 9 4 52
+5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+1
+5
+1
+1
+9
+2
+Fill From Tree Continue With Run 1
+15
+
+==================================================
+[PAGE 155]
+==================================================
+
+1O13
+4 5O02
+4 3 6 8 5 73
+6 9 4 52
+5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+1
+5
+1
+1
+9
+2
+Fill From Tree Continue With Run 1
+5
+995
+7
+
+==================================================
+[PAGE 156]
+==================================================
+
+9 1O13
+4 5O02
+43
+6 8 5 73
+6 9 4 52
+5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+1
+5
+1
+1
+9
+2
+Fill From Tree Continue With Run 1
+5
+95
+7
+2
+Interchange Role Of Buffers
+
+==================================================
+[PAGE 157]
+==================================================
+
+9 1O13
+4 5O0
+43
+6 8 5 73
+6 9 4 5 5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+5
+1
+6
+1
+3
+Fill From Tree
+5
+95
+7
+2
+Interchange Role Of Buffers
+
+==================================================
+[PAGE 158]
+==================================================
+
+9 1O13
+4 5O0
+43
+6 8 5 73
+6 9 4 5 5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+5
+1
+6
+1
+3
+Fill From Tree
+5
+95
+7
+2Continue With Run 1
+2
+
+==================================================
+[PAGE 159]
+==================================================
+
+2 9 1O13
+4 5O04
+3
+6 8 5 73
+6 9 4 5 5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+5
+1
+6
+1
+3
+Fill From Tree
+5
+95
+7Continue With Run 1
+2
+665
+
+==================================================
+[PAGE 160]
+==================================================
+
+2 9 1O13
+4 5O04
+3
+6 8 5 73
+6 94
+5 5 846
+83
+53
+74
+55
+84
+64
+9
+I0 I1
+Fill From Disk
+Write To Disk
+5
+1
+6
+1
+3
+Fill From Tree
+5
+95
+7Continue With Run 1
+2
+665
+1195
+
+==================================================
+[PAGE 161]
+==================================================
+
+•Let k be number of external nodes in the 
+loser tree.
+•Run size >= k.
+•Sorted input => 1  run.
+•Reverse of sorted input => n/k  runs.
+•Average run size is ~2k.RUNSIZE
+
+==================================================
+[PAGE 162]
+==================================================
+
+•Memory capacity = m records.
+•Run size using fill memory, sort, and output 
+run scheme = m.
+•Use loser tree scheme.
+▪Assume block size is b records.
+▪Need memory for 3 buffers ( 3b records).
+▪Loser tree k = m – 3b.
+▪Average run size = 2k = 2(m – 3b).
+▪2k >= m  when m >= 6b .
+Comparison
+
+==================================================
+[PAGE 163]
+==================================================
+
+•Assume b = 100 .
+Comparison
+m5001000 500010000
+k200700 47009700
+2k4001400 940019400
+
+==================================================
+[PAGE 164]
+==================================================
+
+•Total internal processing time using fill 
+memory, sort, and output run scheme          
+= O((n/m) m log m) = O(n log m) .
+•Total internal processing time using loser 
+tree = O(n log k) .
+•Loser tree scheme generates runs that differ 
+in their lengths.
+Comparison
+
+==================================================
+[PAGE 165]
+==================================================
+
+4 3 6 9Merging Runs Of Different Length
+4 369
+Cost = 44
+Cost = 427 1522
+71322
+Best merge sequence?
+
+==================================================
+[PAGE 166]
+==================================================
+
+Optimal Merging Of Runs
+4 3 6 9
+4 369
+Cost = 44
+Cost = 427 1522
+71322
+
+
+==================================================
+[PAGE 167]
+==================================================
+
+Weighted External Path Length
+4 3 6 9WEPL(T) = (weight of external node i) 
+                       * (distance of node i from root of T)
+WEPL(T) = 4 * 2 + 3*2 + 6*2 + 9*2
+                 = 44
+= Merge Cost7 1522
+
+==================================================
+[PAGE 168]
+==================================================
+
+Weighted External Path Length
+WEPL(T) = (weight of external node i) 
+                       * (distance of node i from root of T)
+WEPL(T) = 4 * 3 + 3*3 + 6*2 + 9*1
+                 = 42
+= Merge Cost
+4 369
+71322
+
+==================================================
+[PAGE 169]
+==================================================
+
+Other Applications
+•Message coding and decoding.
+•Lossless data compression.
+
+==================================================
+[PAGE 170]
+==================================================
+
+Message Coding & Decoding
+•Messages M0, M1, M2, …, Mn-1 are to be 
+transmitted.
+•The messages do not change.
+•Both sender and receiver know the messages.
+•So, it is adequate to transmit a code that 
+identifies the message (e.g., message index).
+•Mi is sent with frequency fi.
+•Select message codes so as to minimize 
+transmission and decoding times.
+
+==================================================
+[PAGE 171]
+==================================================
+
+Example
+•n = 4  messages.
+•The frequencies are [2, 4, 8, 100] .
+•Use 2-bit codes [00, 01, 10, 11] .
+•Transmission cost = 2*2 + 4*2 + 8*2 + 100*2
+                                 = 228 .
+•Decoding is done using a binary tree.
+
+==================================================
+[PAGE 172]
+==================================================
+
+Example
+•Decoding cost = 2*2 + 4*2 + 8*2 + 100*2
+                           = 228
+                           = transmission cost
+                           = WEPL2 4 8 1000 1
+1 0
+M3 M0M1M2
+
+==================================================
+[PAGE 173]
+==================================================
+
+Example
+•Every binary tree with n external nodes 
+defines a code set for n messages.
+2 481000 1
+1 0 M3
+M0M1M2 1 0•Decoding cost 
+   = 2*3 + 4*3 + 8*2 + 100*1
+    = 134
+   = transmission cost
+   = WEPL
+
+==================================================
+[PAGE 174]
+==================================================
+
+Another Example
+No code is a prefix of another!0
+0
+00
+0 01
+1 1
+1 1 1
+M0M1M2M3M4M5 M8M9
+M6 M7
+
+==================================================
+[PAGE 175]
+==================================================
+
+Lossless Data Compression
+•Alphabet = {a, b, c, d} .
+•String with 10 as, 5 bs, 100 c s, and 900 d s.
+•Use a 2-bit code.
+▪a = 00 , b = 01 , c = 10 , d = 11 .
+▪Size of string = 10*2 + 5*2 + 100*2 + 900*2
+                         = 2030  bits.
+▪Plus size of code table.
+
+==================================================
+[PAGE 176]
+==================================================
+
+Lossless Data Compression
+•Use a variable length code that satisfies 
+prefix property ( no code is a prefix of  
+another ).
+▪a = 000 , b = 001 , c = 01 , d = 1 .
+▪Size of string = 10*3 + 5*3 + 100*2 + 900*1
+                         = 1145  bits.
+▪Plus size of code table.
+▪Compression ratio is approx. 2030/1145 = 1.8 .
+
+==================================================
+[PAGE 177]
+==================================================
+
+Lossless Data Compression
+•Decode 0001100101…
+•addbc…
+•Compression ratio is maximized when the decode tree 
+has minimum WEPL.0 1
+1 0 d
+a bc 1 0
+
+==================================================
+[PAGE 178]
+==================================================
+
+Huffman Trees
+•Trees that have minimum WEPL.
+•Binary trees with minimum WEPL may be 
+constructed using a greedy algorithm.
+•For higher order trees with minimum 
+WEPL, a preprocessing step followed by 
+the greedy algorithm may be used.
+•Huffman codes: codes defined by minimum 
+WEPL trees.
+
+==================================================
+[PAGE 179]
+==================================================
+
+Example —Binary Trees
+•n = 5 , w[0:4] = [2, 5, 4, 7, 9].
+9 2 5 4 7 9
+
+==================================================
+[PAGE 180]
+==================================================
+
+9 5 7 5 7 9Example —Binary Trees
+2•n = 5 , w[0:4] = [2, 5, 4, 7, 9].
+46
+
+==================================================
+[PAGE 181]
+==================================================
+
+7 9Example —Binary Trees
+•n = 5 , w[0:4] = [2, 5, 4, 7, 9].
+611
+5
+2 4
+
+==================================================
+[PAGE 182]
+==================================================
+
+5Example —Binary Trees
+•n = 5 , w[0:4] = [2, 5, 4, 7, 9].
+2 4611
+7 916
+
+==================================================
+[PAGE 183]
+==================================================
+
+5Example —Binary Trees
+•n = 5 , w[0:4] = [2, 5, 4, 7, 9].
+2 4611
+7 91627
+
+==================================================
+[PAGE 184]
+==================================================
+
+Greedy Algorithm For Binary Trees
+•Start with a collection of external nodes, each 
+with one of the given weights. Each external 
+node defines a different tree.
+•Reduce number of trees by 1.
+▪Remove 2 trees with minimum weight from the 
+collection.
+▪Combine them by making them children of a new 
+root node.
+▪The weight of the new tree is the sum of the 
+weights of the individual trees.
+▪Add new tree to tree collection.
+•Repeat reduce step until only 1 tree remains.
+
+==================================================
+[PAGE 185]
+==================================================
+
+Data Structure For Tree Collection
+•Operations are:
+▪Initialize with n trees.
+▪Remove 2 trees with least weight.
+▪Insert new tree.
+•Use a min heap.
+•Initialize … O(n) .
+•2(n – 1) remove min operations … O(n log n) .
+•n – 1 insert operations … O(n log n) .
+•Total time is O(n log n) .
+•Or, (n – 1) remove mins and (n – 1) change mins.
+
+==================================================
+[PAGE 186]
+==================================================
+
+Higher Order Trees
+•Greedy scheme doesn’t work!
+•3-way tree with weights [3, 6, 1, 9] .
+919
+3 6 110
+Greedy Tree Cost = 2936
+14 919
+Optimal Tree Cost = 23
+
+==================================================
+[PAGE 187]
+==================================================
+
+Cause Of Failure
+•One node is not a 3-way node.
+•A 2-way node is like a 3-way node, one of 
+whose children has a weight of 0.3 6 110 919
+Greedy Tree Cost = 290
+•Must start with enough runs/weights of 
+length 0 so that all nodes are 3-way nodes.
+
+==================================================
+[PAGE 188]
+==================================================
+
+How Many Length 0 Runs To Add?
+•k-way tree, k > 1 .
+•Initial number of runs is r.
+•Add least q >= 0  runs of length 0.
+•Each k-way merge reduces the number of runs 
+by k – 1.
+•Number of runs after s k-way merges is
+    r + q – s(k – 1)
+•For some positive integer s, the number of 
+remaining runs must become 1.
+
+==================================================
+[PAGE 189]
+==================================================
+
+How Many Length 0 Runs To Add?
+•So, we want
+    r + q  – s(k–1) = 1
+   for some positive integer s. 
+•So, r + q – 1 = s(k  – 1).
+•Or, (r + q – 1) mod (k – 1) = 0 .
+•Or, r + q – 1 is divisible by  k – 1.
+▪This implies that q < k – 1.
+⚫(r – 1) mod (k – 1) = 0  => q = 0 .
+⚫(r – 1) mod (k – 1) != 0  =>
+                            q = k –1 – (r – 1) mod (k – 1).
+•Or, q = (1 – r) mod (k – 1).
+
+==================================================
+[PAGE 190]
+==================================================
+
+Examples
+•k = 2 .
+▪q = (1 – r) mod (k – 1) = (1 – r) mod 1 = 0 .
+▪So, no runs of length 0 are to be added.
+•k = 4 , r = 6 .
+▪q = (1 – r) mod (k – 1) = (1 – 6) mod 3
+       = ( –5)mod 3 
+       = (6 – 5) mod 3 
+       = 1 .
+▪So, must start with 7 runs, and then apply 
+greedy method.
+
+==================================================
+[PAGE 191]
+==================================================
+
+Improve Run Merging
+•Reduce number of merge passes.
+▪Use higher order merge.
+▪Number of passes                                               
+= ceil(logk(number of initial runs))             
+where kis the merge order.
+•More generally, a higher-order merge 
+reduces the cost of the optimal merge tree.
+
+==================================================
+[PAGE 192]
+==================================================
+
+Improve Run Merging
+•Overlap input, output, and internal merging.
+DISKMEMORYDISK
+
+==================================================
+[PAGE 193]
+==================================================
+
+Steady State Operation
+Read from 
+diskWrite to 
+diskMerge
+
+==================================================
+[PAGE 194]
+==================================================
+
+DISKMEMORYDISKPartitioning Of Memory
+•Need exactly 2 output buffers.I1 I0O0 O1
+Loser Tree
+… Ib
+•Need at least k+1 (k is merge order) input buffers.
+•2k input buffers suffice.
+
+==================================================
+[PAGE 195]
+==================================================
+
+Number Of Input Buffers
+•When 2 input buffers are dedicated to each 
+of the k runs being merged, 2k buffers are 
+not enough!
+•Input buffers must be allocated to runs on 
+an as needed basis.
+
+==================================================
+[PAGE 196]
+==================================================
+
+Buffer Allocation
+•When ready to read a buffer load, determine 
+which run will exhaust first.
+▪Examine key of the last record read from each of 
+the k runs.
+▪Run with smallest last key read will exhaust first.
+▪Use an enforceable tie breaker.
+•Next buffer load of input is to come from run 
+that will exhaust first, allocate an input buffer 
+to this run.
+
+==================================================
+[PAGE 197]
+==================================================
+
+Buffer Layout
+Output 
+buffers
+Input buffer 
+queues k=9F0 F1 F2 F3 F4 F5 F6 F7 F8
+R0 R1 R2 R3 R4 R5 R6 R7 R8
+Pool of free input buffersRead
+Buffer
+
+==================================================
+[PAGE 198]
+==================================================
+
+Initialize To Merge k Runs
+•Initialize k queues of input buffers, 1 queue per 
+run, 1 buffer per run.
+•Input one buffer load from each of the k runs.
+•Put k – 1 unused input buffers into pool of free 
+buffers.
+•Set activeOutputBuffer = 0 .
+•Initiate input of next buffer load from first run to 
+exhaust. Use remaining unused input buffer for 
+this input.
+
+==================================================
+[PAGE 199]
+==================================================
+
+The Method kWayMerge
+•k-way merge from input queues to the active output 
+buffer.
+•Merge stops when either the output buffer gets full or 
+when an end- of-run key is merged into the output 
+buffer.
+•If merge hasn’t stopped and an input buffer gets 
+empty, advance to next buffer in queue and free empty 
+buffer.
+
+==================================================
+[PAGE 200]
+==================================================
+
+Merge k Runs
+repeat
+    kWayMerge;
+    wait for input/output to complete;
+    add new input buffer (if any) to queue for its run;
+    determine run that will exhaust first;
+    if (there is more input from this run)
+        initiate read of next block for this run;
+    initiate write of active output buffer;
+    activeOutputBuffer = 1 – activeOutputBuffer;
+until end-of-run key merged;
+
+==================================================
+[PAGE 201]
+==================================================
+
+What Can Go Wrong?
+•k-way merge from input queues to the active output 
+buffer.
+•Merge stops when either the output buffer gets full or 
+when an end- of-run key is merged into the output 
+buffer.
+•If merge hasn’t stopped and an input buffer gets 
+empty, advance to next buffer in queue and free empty 
+buffer.
+kWayMerge
+There may be no next buffer in the queue.
+
+==================================================
+[PAGE 202]
+==================================================
+
+What Can Go Wrong?
+repeat
+   kWayMerge;
+    wait for input/output to complete;
+    add new input buffer (if any) to queue for its run;
+    determine run that will exhaust first;
+    if (there is more input from this run)
+        initiate read of next block for this run;
+    initiate write of active output buffer;
+    activeOutputBuffer = 1 – activeOutputBuffer;
+until end of run key merged;
+Merge k Runs
+There may be no 
+free input buffer 
+to read into.
+
+==================================================
+[PAGE 203]
+==================================================
+
+•If merge hasn’t stopped and an input buffer gets 
+empty, advance to next buffer in queue and free empty 
+buffer. There may be no next buffer in the queue.
+•If this type of failure were to happen, using two 
+different and valid analyses, we will end up 
+with inconsistent counts of the amount of data 
+available to kWayMerge .
+•Data available to kWayMerge is data in
+▪Input buffer queues.
+▪Active output buffer.
+▪Excludes data in buffer being read or written.
+kWayMerge
+
+==================================================
+[PAGE 204]
+==================================================
+
+No Next Buffer In Queue
+repeat
+   kWayMerge;
+    wait for input/output to complete;
+    add new input buffer (if any) to queue for its run;
+    determine run that will exhaust first;
+    if (there is more input from this run)
+        initiate read of next block for this run;
+    initiate write of active output buffer;
+    activeOutputBuffer = 1 – activeOutputBuffer;
+until end-of-run key merged;
+• Exactly k buffer loads available to kWayMerge.
+
+==================================================
+[PAGE 205]
+==================================================
+
+•If merge hasn’t stopped and an input buffer gets 
+empty, advance to next buffer in queue and free empty 
+buffer. There may be no next buffer in the queue.
+•Alternative analysis of data available to kWayMerge 
+at time of failure.
+▪< 1 buffer load in active output buffer
+▪<= k – 1 buffer loads in remaining k – 1 queues
+▪Total data available to k-way merge is < k buffer 
+loads.
+kWayMerge
+
+==================================================
+[PAGE 206]
+==================================================
+
+•Suppose there is no free input buffer.
+•One analysis will show there are exactly k + 1  
+buffer loads in memory (including newly read 
+input buffer) at time of failure.
+•Another analysis will show there are > k + 1  
+buffer loads in memory at time of failure.
+•Note that at time of failure there is no buffer 
+being read or written.
+ There may be no 
+free input buffer 
+to read into.
+Merge k Runs
+initiate read of next block for this run;
+
+==================================================
+[PAGE 207]
+==================================================
+
+No Free Input Buffer
+repeat
+   kWayMerge;
+    wait for input/output to complete;
+    add new input buffer (if any) to queue for its run;
+    determine run that will exhaust first;
+    if (there is more input from this run)
+        initiate read of next block for this run;
+    initiate write of active output buffer;
+    activeOutputBuffer = 1 – activeOutputBuffer;
+until end-of-run key merged;
+• Exactly k + 1  buffer loads in memory.
+
+==================================================
+[PAGE 208]
+==================================================
+
+•Alternative analysis of data in memory.
+▪1 buffer load in the active output buffer.
+▪1 input queue may have an empty first buffer. 
+▪Remaining  k – 1 input queues have a nonempty first 
+buffer.
+▪Remaining k input buffers must be in queues and full.
+▪Since k > 1 , total data in memory is > k + 1  buffer 
+loads.There may be no 
+free input buffer 
+to read into. initiate read of next block for this run;
+Merge k Runs
+
+==================================================
+[PAGE 209]
+==================================================
+
+Minimize Wait Time For I/O To 
+Complete
+Time to fill an output buffer
+~ time to read a buffer load
+~ time to write a buffer load
+
+==================================================
+[PAGE 210]
+==================================================
+
+Initializing For Next k-way Merge
+
+
+==================================================
+[PAGE 211]
+==================================================
+
+Initializing For Next k-way Merge
+Change
+if (there is more input from this run)
+        initiate read of next block for this run;
+to
+if (there is more input from this run)
+        initiate read of next block for this run;
+else
+        initiate read of a block for the next k-way merge if 
+        on current read disk;
+
+==================================================
+[PAGE 212]
+==================================================
+
+Phase 2 (Run Merging) Time
+Using 1 output and  k input buffers ( k is merge 
+order) and 1 disk 
+4
+8
+16
+64tIO + 32tIM
+
+==================================================
+[PAGE 213]
+==================================================
+
+Phase 2 (Run Merging) Time
+Using 2 output and  2k input buffers ( k is merge 
+order) and 2 disks 
+4
+8
+16
+~38tIO
+
+==================================================
+[PAGE 214]
+==================================================
+
+External Merge Sort Steps
+•Run Generation
+▪Memory load scheme
+▪Loser tree
+•Merge Sequence For Runs & Run Distribution
+▪Huffman Trees
+▪Runs for external nodes on even levels on one 
+disk; others on second disk if you have 2 disks
+•Run merging
+▪Loser tree
+▪Double buffering if you have two disks
+
+==================================================
+[PAGE 215]
+==================================================
+
+Double-Ended Priority Queues
+•Primary operations
+▪Insert
+▪Remove Max
+▪Remove Min
+•Note that a single-ended priority queue 
+supports just one of the above remove 
+operations.
+
+==================================================
+[PAGE 216]
+==================================================
+
+General Methods
+•Dual min and max single-ended priority 
+queues.
+•Correspondence based min and max single-
+ended priority queues.
+
+==================================================
+[PAGE 217]
+==================================================
+
+Specialized Structures
+•Symmetric min-max heaps.
+•Min-max heaps.
+•Deaps.
+✓Interval heaps .
+…
+
+==================================================
+[PAGE 218]
+==================================================
+
+Dual Single-Ended Priority Queues
+•Use a min and a max single-ended priority 
+queue. 
+•Single-ended priority queue also must 
+support an arbitrary remove.
+•Each element is in both single-ended 
+priority queues.
+•Each priority queue node has a pointer to 
+the node in the other priority queue that has 
+the same element.
+
+==================================================
+[PAGE 219]
+==================================================
+
+9-Element Example
+•Only 5 of 9 two-way pointers shown.
+•Insert, remove min, remove max, initialize.
+•Operation cost is more than doubled relative to heap.
+•Space for 2nnodes.1
+4
+5 7 9 3
+8 62
+Min Heap9
+6
+5 1 4 7
+2 38
+Max Heap
+
+==================================================
+[PAGE 220]
+==================================================
+
+Correspondence Structures
+•Use a min and a max single-ended priority queue. 
+•At most 1 element is in a buffer.
+•Remaining elements are in the single-ended priority 
+queues, which may be of different size.
+•No element is in both the min and max single-ended 
+priority queue.
+•Establish a correspondence between the min and max 
+single-ended priority queues.
+▪Total correspondence.
+▪Leaf correspondence.
+•Single-ended priority queue also must support an arbitrary 
+remove.
+
+==================================================
+[PAGE 221]
+==================================================
+
+Total Correspondence
+•The min- and max-priority queues are of the 
+same size.
+•Each element of the min priority queue is 
+paired with a different and >= element in 
+the max priority queue.
+
+==================================================
+[PAGE 222]
+==================================================
+
+Total Correspondence Example
+1
+5 9
+14 17
+Min Heap20
+10 18   
+2 7
+Max Heap
+Buffer = 12
+
+==================================================
+[PAGE 223]
+==================================================
+
+Insert
+•Buffer empty  => place in buffer.
+•Else, insert smaller of new and buffer elements into 
+min priority queue and larger into max priority queue; 
+establish correspondence between the 2 elements.1
+5 9
+14 17
+Min Heap20
+10 18   
+2 7
+Max Heap
+Buffer = 12
+
+==================================================
+[PAGE 224]
+==================================================
+
+Remove Min
+•Buffer is min  => empty buffer.
+•Else, remove min from min PQ as well as 
+corresponding element from max PQ; reinsert 
+corresponding element.1
+5 9
+14 17
+Min Heap20
+10 18   
+2 7
+Max Heap
+Buffer = 12
+
+==================================================
+[PAGE 225]
+==================================================
+
+Leaf Correspondence
+•Min- and max-priority queues may have 
+different size.
+•Each leaf element of the min priority queue 
+is paired with a different and >= element in 
+the max priority queue.
+•Each leaf element of the max priority queue 
+is paired with a different and <= element in 
+the min priority queue.
+
+==================================================
+[PAGE 226]
+==================================================
+
+Added Restrictions 
+•When an element is inserted into a single-ended 
+PQ, only the newly inserted element can 
+become a new leaf.
+•When an element is deleted from a single-ended 
+PQ, only the parent of the deleted element can 
+become a new leaf.
+•Min and max heaps do not satisfy these 
+restrictions. So, leaf correspondence is harder to 
+implement using min and max heaps.
+
+==================================================
+[PAGE 227]
+==================================================
+
+Leaf Correspondence Example
+1
+5 3
+14 17
+Min Heap20
+10 18   
+6 7
+Max Heap
+Buffer = 12
+
+==================================================
+[PAGE 228]
+==================================================
+
+Insert
+1
+5 3
+14 17
+Min Heap20
+10 18   
+6 7
+Max Heap
+Buffer = 12
+•Buffer empty  => place in buffer.
+•Else, insert smaller of new and buffer elements 
+into min priority queue; insert larger into max 
+priority queue only if smaller one is a leaf .
+
+==================================================
+[PAGE 229]
+==================================================
+
+Insert
+1
+5 3
+14 17
+Min Heap20
+10 18   
+6 7
+Max Heap
+Buffer = 12
+•Case when min and/or max heap originally have an 
+even number of elements is more involved, because a 
+nonleaf may become a leaf. See reference.
+
+==================================================
+[PAGE 230]
+==================================================
+
+Remove Min
+•Buffer is min  => empty buffer.
+•Else, remove min from min PQ as well as 
+corresponding element (if any and a leaf) from max 
+PQ; reinsert removed corresponding element (see 
+reference for details).1
+5 3
+14 17
+Min Heap20
+10 18   
+6 7
+Max Heap
+Buffer = 12
+
+==================================================
+[PAGE 231]
+==================================================
+
+Interval Heaps
+•Complete binary tree.
+•Assume not empty.
+•Each node (except possibly last one) has 2elements.
+•Last node has 1or 2elements.
+•Let aand bbe the elements in a node P, a <= b .
+•[a, b] is the interval represented by P.
+•The interval represented by a node that has just one 
+element ais [a, a] .
+•The interval [c, d] is contained in interval [a, b] iff a <= 
+c <= d <= b .
+•In an interval heap each node’s (except for root) 
+interval is contained in that of its parent.
+
+==================================================
+[PAGE 232]
+==================================================
+
+Interval
+•[c,d] is contained in [a,b]
+•a <= c
+•d <= ba b
+c d
+
+==================================================
+[PAGE 233]
+==================================================
+
+Example Interval Heap
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Left end points define a min heap.
+Right end points define a max heap.
+
+==================================================
+[PAGE 234]
+==================================================
+
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Min and max elements are in the root.
+Store as an array.
+Height is ~log2 n.Example Interval Heap
+
+==================================================
+[PAGE 235]
+==================================================
+
+Insert An Element
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Insert 27. 3527,35
+New element becomes a left end point.
+Insert new element into min heap.
+
+==================================================
+[PAGE 236]
+==================================================
+
+Another Insert
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Insert 18. 35
+New element becomes a left end point.
+Insert new element into min heap.
+
+==================================================
+[PAGE 237]
+==================================================
+
+28,55 25,3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Insert 18.,60
+New element becomes a left end point.
+Insert new element into min heap.Another Insert
+
+==================================================
+[PAGE 238]
+==================================================
+
+28,55 25,3520,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Insert 18.,70
+New element becomes a left end point.
+Insert new element into min heap.18,70Another Insert
+
+==================================================
+[PAGE 239]
+==================================================
+
+Yet Another Insert
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+Insert 82. 35
+New element becomes a right end point.
+Insert new element into max heap.
+
+==================================================
+[PAGE 240]
+==================================================
+
+After 82 Inserted
+28,55 35,6025,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,8015,82 30,6010,90
+
+==================================================
+[PAGE 241]
+==================================================
+
+28,5525,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,8015,82 30,6010,90One More Insert Example
+Insert 8.
+New element becomes both a left and a 
+right end point.
+Insert new element into min heap.
+
+==================================================
+[PAGE 242]
+==================================================
+
+25 28,5520,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 15,8010,82 30,608,90After 8 Is Inserted
+
+==================================================
+[PAGE 243]
+==================================================
+
+Remove Min Element
+•n = 0  => fail.
+•n = 1  => heap becomes empty.
+•n = 2  => only one node, take out left end point.
+•n > 2  => not as simple.
+
+==================================================
+[PAGE 244]
+==================================================
+
+Remove Min Element Example
+28,55 35,6025,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,8015,82 30,6010,90
+Remove left end point from root.
+Remove left end point from last node.
+Reinsert into min heap, begin at root.,90
+,60
+Delete last node if now empty.35
+
+==================================================
+[PAGE 245]
+==================================================
+
+28,55 6025,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,8015,82 30,6015,90
+Swap with right end point if necessary.,8235Remove Min Element Example
+
+==================================================
+[PAGE 246]
+==================================================
+
+28,55 6025,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,8015,82 30,6015,90
+Swap with right end point if necessary.,2035Remove Min Element Example
+
+==================================================
+[PAGE 247]
+==================================================
+
+28,55 6025,70 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 16,35 20,8015,82 30,6015,90
+Swap with right end point if necessary.,1920Remove Min Element Example
+
+==================================================
+[PAGE 248]
+==================================================
+
+28,55 6025,70 30,50 19,20 17,17 50,55 47,58 40,45 40,4335,50 45,60 16,35 20,8015,82 30,6015,90Remove Min Element Example
+
+==================================================
+[PAGE 249]
+==================================================
+
+Initialize
+68,55 35,1425,19 57,50 46,19 17,37 50,25 47,28 20,45 40,1335,50 49,63 48,20 20,2399,82 1,1270,39
+Examine nodes bottom to top.
+Swap end points in current root if needed.
+Reinsert right end point into max heap.Reinsert left end point into min heap.
+
+==================================================
+[PAGE 250]
+==================================================
+
+Cache Optimization
+•Heap operations.
+▪Uniformly distributed keys.
+▪Insert bubbles approx. 1.6 levels up the heap on 
+average.
+▪Remove min (max) height – 1 levels down the heap.
+•Optimize cache utilization for remove min 
+(max).
+
+==================================================
+[PAGE 251]
+==================================================
+
+Cache Aligned Array
+•Cache line is 32 bytes.
+•Heap node size is 8 bytes ( 1 8-byte element). 
+•4 nodes/cache line.
+0 1 2 3 4 5 6 7 12 3 4 5 6 7
+•A remove min (max) has ~h cache misses on 
+average.
+▪Root and its children are in the same cache line.
+▪~log2n cache misses.
+▪Only half of each cache line is used (except root’s).Cache Aligned Array
+
+==================================================
+[PAGE 252]
+==================================================
+
+d-ary Heap
+•Complete n node tree whose degree is d.
+•Min (max) tree.
+•Number nodes in breadth-first manner with 
+root being numbered 1.
+•Parent(i) = ceil((i – 1)/d) .
+•Children are d*(i – 1) + 2 , …, min{d*i + 1, n} .
+•Height is logdn.
+•Height of 4-ary heap is half that of 2-ary heap.
+
+==================================================
+[PAGE 253]
+==================================================
+
+d = 4, 4- Heap
+•Worst-case insert moves up half as many levels 
+as when d = 2 .
+▪Average remains at about 1.6 levels.
+•Remove-min operations now do 4 compares per 
+level rather than 2 (determine smallest child and 
+see if this child is smaller than element being 
+relocated).
+▪But, number of levels is half.
+▪Other operations associated with remove min are 
+halved (move small element up, loop iterations, etc.)
+
+==================================================
+[PAGE 254]
+==================================================
+
+4-Heap Cache Utilization
+•Standard mapping into cache-aligned array.
+0 1 2 3 4 5 6 7 - - - 1 2 3 4 50 1 2 3 4 5 6 7 12 3 4 5 6 7
+•Siblings are in 2 cache lines.
+▪~log2n cache misses for average remove min (max).
+•Shift 4-heap by 2 slots.
+•Siblings are in same  cache line.
+▪~log4n cache misses for average remove min (max).
+
+==================================================
+[PAGE 255]
+==================================================
+
+d-ary Heap Performance
+•Speedup of about 1.5 to 1.8 when sorting a 
+large number of elements using heapsort 
+and cache-aligned 4-heap vs. 2-heap that 
+begins at array position 0.
+•Cache-aligned  4-heap generally performs as 
+well as, or better, than other d-heaps.
+•Use degree 4 complete tree for interval 
+heaps instead of degree 2.
+
+==================================================
+[PAGE 256]
+==================================================
+
+Application Of Interval Heaps
+•Complementary range search problem.
+▪Collection of 1D points (numbers).
+▪Insert a point.
+•O(log n)
+▪Remove a point given its location in the structure.
+•O(log n)
+▪Report all points not in the range [a,b], a <= b .
+•O(k) , where k is the number of points not in the range.
+
+==================================================
+[PAGE 257]
+==================================================
+
+Example
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+[5,100]
+[2,65]
+
+==================================================
+[PAGE 258]
+==================================================
+
+Example
+28,55 3525,60 30,50 16,19 17,17 50,55 47,58 40,45 40,4335,50 45,60 15,20 20,7015,80 30,6010,90
+[2,65]
+
+==================================================
+[PAGE 259]
+==================================================
+
+Leftist Trees
+Linked binary tree.
+Can do everything a heap can do and in the 
+same asymptotic complexity.
+▪insert
+▪remove min (or max)
+▪arbitrary remove (need parent pointers)
+▪initialize
+Can meld two leftist tree priority queues in 
+O(log n) time.
+
+==================================================
+[PAGE 260]
+==================================================
+
+Extended Binary Trees
+Start with any binary tree and add an 
+external node wherever there is an 
+empty subtree.
+Result is an extended binary tree.
+
+==================================================
+[PAGE 261]
+==================================================
+
+A Binary Tree
+
+==================================================
+[PAGE 262]
+==================================================
+
+An Extended Binary Tree
+number of external nodes is n+1
+
+==================================================
+[PAGE 263]
+==================================================
+
+The Function s()
+For any node x in an extended binary tree, 
+let s(x) be the length of a shortest path 
+from x to an external node in the subtree 
+rooted at x.
+
+==================================================
+[PAGE 264]
+==================================================
+
+s() Values Example
+
+==================================================
+[PAGE 265]
+==================================================
+
+0 0 0 00 0
+0 000
+1 112 1 12 12s() Values Example
+
+==================================================
+[PAGE 266]
+==================================================
+
+Properties Of s()
+If x is an external node, then s(x) = 0 .
+Otherwise,
+s(x) = min {s(leftChild(x)),
+               s(rightChild(x))} + 1
+
+==================================================
+[PAGE 267]
+==================================================
+
+(Height Biased) Leftist Trees
+A binary tree is a (height biased) leftist tree 
+iff for every internal node x, 
+s(leftChild(x)) >= s(rightChild(x))
+So, in a leftist tree, s(x) = s(rightChild) + 1 .
+
+==================================================
+[PAGE 268]
+==================================================
+
+A Leftist Tree
+0 0 0 00 0
+0 000
+1 1 12 1 12 12
+s() decreases by 1 each time you move to a right child
+how about when you move to a left child?
+subtrees are also leftist trees
+
+==================================================
+[PAGE 269]
+==================================================
+
+Leftist Trees – Property 1
+In a leftist tree, the rightmost path is a 
+shortest root to external node path and 
+the length of this path is s(root).
+
+==================================================
+[PAGE 270]
+==================================================
+
+A Leftist Tree
+0 0 0 00 0
+0 000
+1 112 1 12 12
+Length of rightmost path is 2.
+
+==================================================
+[PAGE 271]
+==================================================
+
+Leftist Trees —Property 2
+The number of internal nodes is at least
+2s(root) - 1
+Because levels 1 through s(root)  have no 
+external nodes.
+
+==================================================
+[PAGE 272]
+==================================================
+
+A Leftist Tree
+0 0 0 00 0
+0 000
+1 112 1 12 12
+Levels 1 and 2 have no external nodes.
+Max # of internal nodes?
+
+==================================================
+[PAGE 273]
+==================================================
+
+Leftist Trees —Property 3
+Length of rightmost path is O(log n) , where 
+n is the number of (internal) nodes in a 
+leftist tree.
+Property 2 =>
+▪n >= 2s(root) – 1 => s(root) <= log2(n+1)
+Property 1 => length of rightmost path is  
+s(root).
+
+==================================================
+[PAGE 274]
+==================================================
+
+Leftist Trees As Priority Queues
+Min leftist tree … leftist tree that is a min tree.
+Used as a min priority queue.
+Max leftist tree … leftist tree that is a max tree.
+Used as a max priority queue.
+
+==================================================
+[PAGE 275]
+==================================================
+
+A Min Leftist Tree
+8 696 8 54 32
+
+==================================================
+[PAGE 276]
+==================================================
+
+Some Min Leftist Tree Operations
+findMin()
+put()
+removeMin()
+meld()
+initialize()
+put()  and removeMin()  use meld() .
+
+==================================================
+[PAGE 277]
+==================================================
+
+Put Operation
+put(7)
+8 6 96 8 54 32
+Create a single node min leftist tree.7
+Meld the two min leftist trees.
+
+==================================================
+[PAGE 278]
+==================================================
+
+Remove Min
+8 696 8 54 32
+Remove the root.
+
+==================================================
+[PAGE 279]
+==================================================
+
+Remove Min
+8 696 8 54 32
+Remove the root.
+Meld the two subtrees.
+
+==================================================
+[PAGE 280]
+==================================================
+
+Meld Two Min Leftist Trees
+8 696 8 54 3
+6
+Traverse only the rightmost paths so as to get 
+logarithmic performance.
+
+==================================================
+[PAGE 281]
+==================================================
+
+Meld Two Min Leftist Trees
+8 6 96 8 54 3
+6
+Meld right subtree of tree with smaller root and 
+all of other tree.
+Make the result the new right subtree of the 
+smaller root.
+Swap left and right subtrees if needed.
+
+==================================================
+[PAGE 282]
+==================================================
+
+Meld Two Min Leftist Trees
+8 6 96 8 54 3
+6
+Meld right subtree of tree with smaller root and all of 
+other tree.
+
+==================================================
+[PAGE 283]
+==================================================
+
+Meld Two Min Leftist Trees
+8 66 84 6
+Meld right subtree of tree with smaller root and all of 
+other tree.
+
+==================================================
+[PAGE 284]
+==================================================
+
+Meld Two Min Leftist Trees
+8 6
+Meld right subtree of tree with smaller root and all of 
+other tree.
+Right subtree of 6 is empty. So, result of melding right 
+subtree of tree with smaller root and other tree is the 
+other tree.
+
+==================================================
+[PAGE 285]
+==================================================
+
+Meld Two Min Leftist Trees
+Swap left and right subtrees if s(left) < s(right) .Make melded subtree right subtree of smaller root.8 6
+6
+8
+6
+8
+
+==================================================
+[PAGE 286]
+==================================================
+
+Meld Two Min Leftist Trees
+8 66 64
+88 6646
+8
+Make melded subtree right subtree of smaller root.
+Swap left and right subtree if s(left) < s(right) .
+
+==================================================
+[PAGE 287]
+==================================================
+
+Meld Two Min Leftist Trees
+953
+Swap left and right subtree if s(left) < s(right) .Make melded subtree right subtree of smaller root.8 66 64
+8
+
+==================================================
+[PAGE 288]
+==================================================
+
+Meld Two Min Leftist Trees
+953
+8 66 64
+8
+
+==================================================
+[PAGE 289]
+==================================================
+
+Initializing In O(n) Time
+•Create n single-node min leftist trees and 
+place them in a FIFO queue.
+•Repeatedly remove two min leftist trees from 
+the FIFO queue, meld them, and put the 
+resulting min leftist tree into the FIFO queue.
+•The process terminates when only 1 min leftist 
+tree remains in the FIFO queue.
+•Analysis is the same as for heap initialization.       
+
+==================================================
+[PAGE 290]
+==================================================
+
+Arbitrary Remove
+Remove element in node pointed at by x.
+LxA
+B
+R
+x = root => remove min.
+
+==================================================
+[PAGE 291]
+==================================================
+
+Arbitrary Remove, x != root
+LxA
+B
+R
+Make  L right subtree of  p.
+Adjust s and leftist property on path from p to root (stop at 
+first node, if any, whose s value does not change).
+Meld with R.p
+
+==================================================
+[PAGE 292]
+==================================================
+
+Skew Heap
+•Similar to leftist tree
+•No s() values stored
+•Swap left and right subtrees of all nodes on 
+rightmost path rather than just when s(l(x))  < 
+s(r(x))
+•Amortized complexity of insert, remove min, 
+and meld is O(log n)
+
+==================================================
+[PAGE 293]
+==================================================
+
+ Leftist 
+trees Binomial heaps 
+Actual Amortized 
+Find min (or max) O(1) O(1) O(1) 
+Insert O(log n) O(1) O(1)  
+Remove min (or 
+max) O(log n) O(n) O(log n) 
+Meld O(log n) O(1) O(1) 
+ 
+ Binomial Heaps
+
+==================================================
+[PAGE 294]
+==================================================
+
+Min Binomial Heap
+•Collection of min trees.
+64
+958731
+956592
+86 74
+
+==================================================
+[PAGE 295]
+==================================================
+
+Node Structure
+•Degree
+▪Number of children.
+•Child
+▪Pointer to one of the node’s children.
+▪Null iff node has no child.
+•Sibling
+▪Used for circular linked list of siblings.
+•Data
+
+==================================================
+[PAGE 296]
+==================================================
+
+Binomial Heap Representation
+•Circular linked list of min trees.
+64
+958731
+956592
+86 74A
+Degree fields 
+not shown.
+
+==================================================
+[PAGE 297]
+==================================================
+
+Insert 10
+•Add a new single-node min tree to the collection.
+10•Update min-element pointer if necessary.
+64
+958731
+956592
+86 74A
+
+==================================================
+[PAGE 298]
+==================================================
+
+Meld
+•Combine the 2 top-level circular lists.95 7
+A4
+8731
+B
+•Set min-element pointer.
+
+==================================================
+[PAGE 299]
+==================================================
+
+Meld
+95 74
+8731
+C
+
+==================================================
+[PAGE 300]
+==================================================
+
+Remove Min
+•Empty binomial heap  => fail.
+
+==================================================
+[PAGE 301]
+==================================================
+
+Nonempty Binomial Heap
+•Remove a min tree.
+•Reinsert subtrees of removed min tree.
+•Update binomial heap pointer.
+10
+64
+958731
+956592
+86 74A
+
+==================================================
+[PAGE 302]
+==================================================
+
+Remove Min Tree
+•Same as remove an element from a circular list.
+a b c d e
+A
+•No next node  => empty after remove.
+•Otherwise, copy next-node data and remove 
+next node.d
+
+==================================================
+[PAGE 303]
+==================================================
+
+Reinsert Subtrees
+•Combine the 2 top-level circular lists.
+▪Same as in meld operation.95 7
+A4
+8731
+B
+subtrees
+
+==================================================
+[PAGE 304]
+==================================================
+
+Update Binomial Heap Pointer
+•Must examine roots of all min trees to 
+determine the min value.
+
+==================================================
+[PAGE 305]
+==================================================
+
+Complexity Of Remove Min
+•Remove a min tree.
+▪O(1) .
+•Reinsert subtrees.
+▪O(1) .
+•Update binomial heap pointer.
+▪O(s), where  s is the number of min trees in final top-level 
+circular list.
+▪s = O(n) .
+•Overall complexity of remove min is O(n) .
+
+==================================================
+[PAGE 306]
+==================================================
+
+Correct  Remove Min
+•During reinsert of subtrees, pairwise combine 
+min trees whose roots have equal degree.
+•This is essential to get stated amortized bounds 
+and so is the correct way to remove from a 
+Binomial heap.
+•The simple remove min described earlier does 
+not result in the desired amortized complexity 
+and so is incorrect for Binomial heaps.
+
+==================================================
+[PAGE 307]
+==================================================
+
+Pairwise Combine
+10
+64
+958731
+956592
+86 74
+Examine the s = 7  trees in some order.
+Determined by the 2 top-level circular lists.
+
+==================================================
+[PAGE 308]
+==================================================
+
+Pairwise Combine
+1064
+95
+8731
+95
+6592
+86 74
+Use a table to keep track of trees by degree.1234
+tree table
+0
+
+==================================================
+[PAGE 309]
+==================================================
+
+Pairwise Combine
+1064
+95
+8731
+95
+6592
+86 74
+1234
+tree table
+0
+
+==================================================
+[PAGE 310]
+==================================================
+
+Pairwise Combine
+1064
+95
+8731
+95
+6592
+86 74
+1234
+tree table
+0 Combine  2 min trees of degree 0.
+Make the one with larger root a subtree of other.
+
+==================================================
+[PAGE 311]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+01064
+95
+8731
+95
+6592
+86 74
+Update tree table.
+
+==================================================
+[PAGE 312]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+01064
+95
+8731
+95
+6592
+86 74
+Combine  2 min trees of degree 1.
+Make the one with larger root a subtree of other.
+
+==================================================
+[PAGE 313]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+01064
+95
+8731
+95
+6592
+86 74
+Update tree table.
+
+==================================================
+[PAGE 314]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+01064
+95
+8731
+95
+6592
+86 74
+
+==================================================
+[PAGE 315]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+01064
+95
+8731
+95
+6592
+86 74
+Combine  2 min trees of degree 2.
+Make the one with larger root a subtree of other.
+
+==================================================
+[PAGE 316]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+0 Combine  2 min trees of degree 3.
+Make the one with larger root a subtree of other.6
+95
+8731
+6592
+86 74
+104
+95
+
+==================================================
+[PAGE 317]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+06
+95
+8731
+6592
+86 74 104
+95
+Update tree table.
+
+==================================================
+[PAGE 318]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+06
+95
+8731
+6592
+86 74 104
+95
+
+==================================================
+[PAGE 319]
+==================================================
+
+Pairwise Combine
+1234
+tree table
+06
+95
+8731
+6592
+86 74 104
+95
+Create circular list of remaining trees.
+
+==================================================
+[PAGE 320]
+==================================================
+
+Complexity Of Correct  Remove Min
+•Remove tree with min element. O(1)
+•Reinsert its subtrees. O(1)
+•Create and initialize tree table.
+▪O(MaxDegree) .
+▪Done once only.
+•Examine s min trees and pairwise combine.
+▪O(s).
+•Collect remaining trees from tree table, reset table 
+entries to null, and set binomial heap pointer.
+▪O(MaxDegree) .
+•Overall complexity of remove min.
+▪O(MaxDegree + s) .
+
+==================================================
+[PAGE 321]
+==================================================
+
+Binomial Trees
+•Bk is degree k binomial tree.
+B0
+•Bk , k > 0, is:
+…
+B0B1B2Bk-1
+
+==================================================
+[PAGE 322]
+==================================================
+
+Examples
+B0B1B2B3
+
+==================================================
+[PAGE 323]
+==================================================
+
+Number Of Nodes In Bk
+•Nk =  number of nodes in  Bk.
+B0
+•Bk , k > 0, is:
+…
+B0B1B2Bk-1N0 = 1
+•Nk =  N0 + N1 + N2 + …+ Nk-1 + 1 
+        = 2k.
+
+==================================================
+[PAGE 324]
+==================================================
+
+Equivalent Definition
+•Bk , k > 0, is two Bk-1s.
+•One of these is a subtree of the other.
+B1B2 B3
+
+==================================================
+[PAGE 325]
+==================================================
+
+Nk And MaxDegree
+•N0 = 1
+•Nk =  2Nk-1
+        = 2k.
+•If we start with zero elements and perform 
+operations as described, then all trees in all 
+binomial heaps are binomial trees.
+•So, MaxDegree = O(log n) .
+
+==================================================
+[PAGE 326]
+==================================================
+
+Analysis Of Binomial Heaps
+ Leftist 
+trees Binomial heaps 
+Actual Amortized 
+Find min (or max) O(1) O(1) O(1) 
+Insert O(log n) O(1) O(1)  
+Remove min (or 
+max) O(log n) O(n) O(log n) 
+Meld O(log n) O(1) O(1)  
+ 
+ 
+
+==================================================
+[PAGE 327]
+==================================================
+
+Operations
+•Insert
+▪Add a new min tree to top-level circular list.
+•Meld
+▪Combine two circular lists.
+•Remove min
+▪Pairwise combine min trees whose roots have 
+equal degree.
+▪O(MaxDegree + s) , where sis number of min trees 
+following removal of min element but before 
+pairwise combining.
+
+==================================================
+[PAGE 328]
+==================================================
+
+Binomial Trees
+•Bkis degree kbinomial tree.
+B0
+•Bk , k > 0, is:
+…
+B0B1B2Bk-1
+
+==================================================
+[PAGE 329]
+==================================================
+
+Binomial Trees
+•Bk , k > 0 , is two Bk-1s.
+•One of these is a subtree of the other.
+B1B2 B3B0
+
+==================================================
+[PAGE 330]
+==================================================
+
+All Trees In Binomial Heap Are 
+Binomial Trees
+•Initially, all trees in system are Binomial trees (actually, 
+there are no trees initially).
+•Assume true before an operation, show true after the 
+operation.
+•Insert creates a B0.
+•Meld does not create new trees.
+•Remove Min
+▪Reinserted subtrees are binomial trees.
+▪Pairwise combine takes two trees of equal degree 
+and makes one a subtree of the other.
+
+==================================================
+[PAGE 331]
+==================================================
+
+Complexity of Remove Min
+•Let n be the number of inserts.
+▪No binomial tree has more than n elements.
+▪MaxDegree <= log2n.
+▪Complexity of remove min is O(log n + s) = O(n) .
+
+==================================================
+[PAGE 332]
+==================================================
+
+Aggregate Method
+•Get a good bound on the cost of every 
+sequence of operations and divide by the 
+number of operations.
+•Results in same amortized cost for each 
+operation, regardless of operation type.
+•Can’t use this method, because we want to 
+establish a different amortized cost for 
+remove mins than for inserts and melds.
+
+==================================================
+[PAGE 333]
+==================================================
+
+Aggregate Method – Alternative
+•Get a good bound on the cost of every sequence 
+of remove mins and divide by the number of 
+remove mins.
+•Consider the sequence insert, insert, …, insert, 
+remove min.
+▪The cost of the remove min is O(n) , where n is the 
+number of inserts in the sequence. 
+▪So, amortized cost of a remove min is O(n/1) = O(n) .
+
+==================================================
+[PAGE 334]
+==================================================
+
+Accounting Method
+•Guess the amortized cost.
+▪Insert  => 2.
+▪Meld => 1.
+▪Remove min  => 3log2n.
+•Show that P(i) – P(0) >= 0   for all  i.
+
+==================================================
+[PAGE 335]
+==================================================
+
+Potential Function
+•P(i) = amortizedCost(i) – actualCost(i) + P(i – 1)
+•P(i) – P(0) is the amount by which the  first i operations 
+have been over charged.
+•We shall use a credit scheme to keep track of (some of) 
+the over charge.
+•There will be 1 credit on each min tree.
+• Initially,  #trees = 0 and so total credits and P(0) = 0 .
+•Since number of trees cannot be <0, the total credits is 
+always >= 0 and hence P(i) >= 0 for all i.
+
+==================================================
+[PAGE 336]
+==================================================
+
+Insert
+•Guessed amortized cost = 2.
+•Use 1 unit to pay for the actual cost of the insert.
+•Keep the remaining 1 unit as a credit.
+•Keep this credit with the min tree that is created 
+by the insert operation.
+•Potential increases by 1, because there is an  
+overcharge of  1.
+
+==================================================
+[PAGE 337]
+==================================================
+
+Meld
+•Guessed amortized cost = 1.
+•Use 1 unit to pay for the actual cost of the meld.
+•Potential is unchanged, because actual and 
+amortized costs are the same.
+
+==================================================
+[PAGE 338]
+==================================================
+
+Remove Min
+•Let MinTrees be the set of min trees in the 
+binomial heap just before remove min.
+•Let u be the degree of min tree whose root is 
+removed.
+•Let s be the number of min trees in binomial heap 
+just before pairwise combining.
+▪s = #MinTrees + u – 1
+•Actual cost of remove min is  <= MaxDegree + s
+              <= 2log2n –1+ #MinTrees .
+
+==================================================
+[PAGE 339]
+==================================================
+
+Remove Min
+•Guessed amortized cost = 3log2n.
+•Actual cost <= 2log2n – 1 + #MinTrees .
+•Allocation of amortized cost.
+▪Use up to 2log2n – 1  to pay part of actual cost.
+▪Keep some or all of the remaining amortized cost  as 
+a credit.
+▪Put 1 unit of credit on each of the at most log2n + 1  
+min trees left behind by the remove min operation.
+▪Discard the remainder (if any).
+
+==================================================
+[PAGE 340]
+==================================================
+
+Paying Actual Cost Of A Remove Min
+•Actual cost <= 2log2n – 1  + #MinTrees
+         
+•How is it paid for?
+▪2log2n –1  comes from amortized cost of this 
+remove min operation.
+▪#MinTrees  comes from the min trees themselves, at 
+the rate of 1 unit per min tree, using up their credits.
+▪Potential may increase or decrease but remains 
+nonnegative as each remaining tree has a credit.
+
+==================================================
+[PAGE 341]
+==================================================
+
+Potential Method
+•Guess a suitable potential function for 
+which P(i) – P(0) >= 0  for all i.
+•Derive amortized cost of ith operation using 
+P  = P(i) – P(i – 1)
+      = amortized cost – actual cost
+•amortized cost = actual cost + P
+
+==================================================
+[PAGE 342]
+==================================================
+
+Potential Function
+•P(i) = #MinTrees(j)  
+▪#MinTrees(j)  is #MinTrees  for binomial heap  j. 
+▪When binomial heaps A and B are melded, A and 
+B are no longer included in the sum. 
+•P(0) = 0
+•P(i) >= 0  for all  i.
+•ith operation is an insert.
+▪Actual cost of insert  = 1
+▪P  = P(i) – P(i – 1) = 1
+▪Amortized cost of insert  = actual cost + P
+                                           = 2
+
+==================================================
+[PAGE 343]
+==================================================
+
+ith Operation Is A Meld
+•Actual cost of meld  = 1
+•P(i) = #MinTrees(j)
+•P  = P(i) – P(i – 1) = 0
+•Amortized cost of meld  = actual cost + P
+                                          = 1
+
+==================================================
+[PAGE 344]
+==================================================
+
+ith Operation Is A Remove Min
+•old => value just before the remove min
+•new => value just after the remove min.
+•#MinTreesold(j) => value of #MinTrees  in jth 
+binomial heap just before this remove min.
+•Assume remove min is done in kth binomial 
+heap.
+
+==================================================
+[PAGE 345]
+==================================================
+
+ith Operation Is A Remove Min
+•Actual cost of remove min  from binomial heap  k
+   <= 2log2n – 1  + #MinTreesold(k)
+•P  = P(i) – P(i – 1) 
+       = [#MinTreesnew(j) – #MinTreesold(j)]
+       = #MinTreesnew(k) – #MinTreesold(k). 
+•Amortized cost of remove min  = actual cost + P
+     <= 2log2n – 1 + #MinTreesnew (k) 
+     <= 3log2n. 
+
+==================================================
+[PAGE 346]
+==================================================
+
+Actual Cost Of Any Operation 
+Sequence
+•Start with empty Binomial heaps
+•Do i inserts, m melds, and r remove mins
+•Actual cost is O(i + m + r log i)
