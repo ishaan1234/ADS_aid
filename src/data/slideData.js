@@ -6507,12 +6507,6 @@ STRUCTURE:
 • Each tree maintains min property
 • Trees organized by degree
 
-TREE COLLECTION:
-• Tree with root 6: has child 4
-• Tree with root 9: complex structure with children 5, 8, 7, 3, 1
-• Tree with root 9: structure with children 5, 6, 5, 9, 2
-• Tree with root 8: children 6, 7, 4
-
 ORGANIZATION:
 • Trees linked in circular list
 • A pointer provides access
