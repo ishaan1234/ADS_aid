@@ -6568,10 +6568,6 @@ OPERATION: Meld two heaps
 • Combine 2 top-level circular lists
 • Set min-element pointer appropriately
 
-INPUT HEAPS:
-• Heap A: contains tree with root 5, children 7, 9
-• Heap B: contains tree with root 1, children 8, 7, 4, 3
-
 ALGORITHM:
 1. Combine circular lists
 2. Merge the two circular linked lists
@@ -6605,7 +6601,6 @@ Result of melding two binomial heaps.
 
 FINAL STRUCTURE:
 • Combined binomial heap
-• Trees: 9, 5, 7, 4, 8, 7, 3, 1
 • Circular list structure maintained
 
 ORGANIZATION:
@@ -6686,12 +6681,6 @@ ALGORITHM STEPS:
 2. Reinsert subtrees of removed min tree
 3. Update binomial heap pointer
 
-HEAP STRUCTURE:
-• Tree 10: single node
-• Tree 6: has child 4
-• Tree 9: children 5, 8, 7, 3, 1
-• Tree 9: children 5, 6, 5, 9, 2
-• Tree 8: children 6, 7, 4
 
 PROCESS:
 • Identify tree with minimum root
@@ -6757,10 +6746,6 @@ Reinserting subtrees after removing min tree.
 OPERATION: Combine 2 top-level circular lists
 • Same technique as meld operation
 • Integrate subtrees back into heap
-
-INPUT:
-• Remaining trees: 9, 5, 7
-• Subtrees from removed min tree: 4, 8, 7, 3, 1
 
 PROCESS:
 • Extract subtrees from removed min tree
