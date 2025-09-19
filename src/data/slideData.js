@@ -6544,12 +6544,6 @@ PROCESS:
 • Check if 10 is new minimum
 • Update pointer if needed
 
-EXISTING STRUCTURE:
-• Tree with root 6, child 4
-• Tree with root 9: children 5, 8, 7, 3, 1
-• Tree with root 9: children 5, 6, 5, 9, 2
-• Tree with root 8: children 6, 7, 4
-
 RESULT:
 • New tree with root 10 added
 • Binomial heap now has one additional tree
@@ -6575,8 +6569,8 @@ OPERATION: Meld two heaps
 • Set min-element pointer appropriately
 
 INPUT HEAPS:
-• Heap A: contains tree with root 9, children 5, 7
-• Heap B: contains tree with root 4, children 8, 7, 3, 1
+• Heap A: contains tree with root 5, children 7, 9
+• Heap B: contains tree with root 1, children 8, 7, 4, 3
 
 ALGORITHM:
 1. Combine circular lists
